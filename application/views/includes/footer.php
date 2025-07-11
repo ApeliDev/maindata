@@ -359,5 +359,72 @@
             }, 500);
         }, 3000);
     };
+
+    // Add to your frontend JavaScript
+    let heartbeatInterval;
+
+    function startHeartbeat() {
+        heartbeatInterval = setInterval(() => {
+            fetch('<?php echo base_url() ?>Main/heartbeat')
+                .then(response => response.json())
+                .then(data => console.log('Heartbeat response:', data));
+        }, 300000); // Every 5 minutes
+    }
+
+    function stopHeartbeat() {
+        clearInterval(heartbeatInterval);
+    }
+
+    // Start heartbeat when deposit modal opens
+    document.getElementById('depositModal').addEventListener('show.bs.modal', startHeartbeat);
+    document.getElementById('depositModal').addEventListener('hidden.bs.modal', stopHeartbeat);
+
+
+    let sessionTimeout;
+
+function checkSession() {
+    const lastActivity = localStorage.getItem('lastActivity');
+    if (!lastActivity) return;
+    
+    const now = new Date().getTime();
+    const timeLeft = 1800000 - (now - lastActivity); // 30 minutes
+    
+    if (timeLeft <= 300000) { // 5 minutes left
+        showSessionWarning(timeLeft);
+    }
+}
+
+function showSessionWarning(timeLeft) {
+    const minutes = Math.ceil(timeLeft / 60000);
+    Swal.fire({
+        title: 'Session Expiring Soon',
+        text: `Your session will expire in ${minutes} minutes. Would you like to extend it?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Extend Session',
+        cancelButtonText: 'Logout'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch('<?php echo base_url() ?>Main/extendSession')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        localStorage.setItem('lastActivity', new Date().getTime());
+                        Swal.fire('Session Extended', 'Your session has been extended', 'success');
+                    }
+                });
+        } else {
+            window.location.href = '<?php echo base_url() ?>logout';
+        }
+    });
+}
+
+// Update last activity on any user interaction
+document.addEventListener('click', () => {
+    localStorage.setItem('lastActivity', new Date().getTime());
+});
+
+// Check session every minute
+setInterval(checkSession, 60000);
 });
 </script>
