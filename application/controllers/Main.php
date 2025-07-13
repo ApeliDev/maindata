@@ -243,33 +243,65 @@ class Main extends CI_Controller {
         $amount = $this->input->post('amount');
         $amount = number_format((float)$amount, 2, '.', '');
         $transaction_id = $this->transaction_id;
-
+        
+        // Log deposit attempt
+        log_message('info', "Deposit attempt - Session: {$session_id}, CR: {$crNumber}, Amount: {$amount}, Transaction: {$transaction_id}");
+        
         $body = array(
             'session_id' => $session_id,
             'crNumber' => $crNumber,
             'amount' => $amount,
             'transaction_id' => $transaction_id,
         );
-
-        $response = $this->Operations->CurlPost($url, $body);
-        $decode = json_decode($response, true);
         
-        $status = $decode['status'];
-        $message = $decode['message'];
-        $data = $decode['data'];
-        
-        if($status == 'fail') {
-            $this->session->set_flashdata('msg', $message);
-            redirect('logout');
-        } elseif($status == 'success') {
-            $this->session->set_flashdata('msg', $message);
+        try {
+            $response = $this->Operations->CurlPost($url, $body);
+            
+            if ($response === false) {
+                log_message('error', "Deposit API call failed - Transaction: {$transaction_id}");
+                $this->session->set_flashdata('msg', 'Failed to connect to deposit service');
+                redirect('home');
+                return;
+            }
+            
+            $decode = json_decode($response, true);
+            
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                log_message('error', "Invalid API response format - Transaction: {$transaction_id}, Response: {$response}");
+                $this->session->set_flashdata('msg', 'Invalid response from deposit service');
+                redirect('home');
+                return;
+            }
+            
+            $status = $decode['status'];
+            $message = $decode['message'];
+            $data = $decode['data'];
+            
+            // Log the API response
+            log_message('info', "Deposit API response - Transaction: {$transaction_id}, Status: {$status}, Message: {$message}");
+            
+            if($status == 'fail') {
+                log_message('error', "Deposit failed - Transaction: {$transaction_id}, Message: {$message}");
+                $this->session->set_flashdata('msg', $message);
+                redirect('home');
+            } elseif($status == 'success') {
+                log_message('info', "Deposit successful - Transaction: {$transaction_id}, Message: {$message}");
+                $this->session->set_flashdata('msg', $message);
+                redirect('home');
+            } elseif($status == 'error') {
+                log_message('error', "Deposit error - Transaction: {$transaction_id}, Message: {$message}");
+                $this->session->set_flashdata('msg', $message);
+                redirect('home');
+            } else {
+                log_message('error', "Unknown deposit status - Transaction: {$transaction_id}, Status: {$status}, Response: " . json_encode($decode));
+                $this->session->set_flashdata('msg', 'Something went wrong');
+                redirect('home');
+            }
+            
+        } catch (Exception $e) {
+            log_message('error', "Deposit exception - Transaction: {$transaction_id}, Error: " . $e->getMessage());
+            $this->session->set_flashdata('msg', 'Service temporarily unavailable');
             redirect('home');
-        } elseif($status == 'error') {
-            $this->session->set_flashdata('msg', $message);
-            redirect('home');
-        } else {
-            $this->session->set_flashdata('msg', 'something went wrong');
-            redirect('logout');
         }
     }
 
