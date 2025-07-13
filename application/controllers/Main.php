@@ -269,7 +269,7 @@ class Main extends CI_Controller {
             redirect('home');
         } else {
             $this->session->set_flashdata('msg', 'something went wrong');
-            redirect('logout');
+            redirect('home');
         }
     }
 
