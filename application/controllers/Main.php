@@ -235,7 +235,7 @@ class Main extends CI_Controller {
         }
     }
     
-    // Deposit to Deriv
+    // Enhanced Deposit to Deriv with better error handling
     public function DepositToDeriv() {
         $url = APP_INSTANCE.'deriv_deposit';
         $session_id = $this->session->userdata('session_id');
@@ -257,45 +257,66 @@ class Main extends CI_Controller {
         try {
             $response = $this->Operations->CurlPost($url, $body);
             
-            if ($response === false) {
+            // Enhanced response validation
+            if ($response === false || empty($response)) {
                 log_message('error', "Deposit API call failed - Transaction: {$transaction_id}");
                 $this->session->set_flashdata('msg', 'Failed to connect to deposit service');
                 redirect('home');
                 return;
             }
             
+            // Log the raw response for debugging
+            log_message('info', "Raw API response - Transaction: {$transaction_id}, Response: {$response}");
+            
             $decode = json_decode($response, true);
             
             if (json_last_error() !== JSON_ERROR_NONE) {
-                log_message('error', "Invalid API response format - Transaction: {$transaction_id}, Response: {$response}");
+                log_message('error', "Invalid API response format - Transaction: {$transaction_id}, JSON Error: " . json_last_error_msg() . ", Response: {$response}");
                 $this->session->set_flashdata('msg', 'Invalid response from deposit service');
+                redirect('home');
+                return;
+            }
+            
+            // Check if decode is valid and has required fields
+            if (!is_array($decode) || !isset($decode['status']) || !isset($decode['message'])) {
+                log_message('error', "Incomplete API response - Transaction: {$transaction_id}, Response: " . json_encode($decode));
+                $this->session->set_flashdata('msg', 'Incomplete response from deposit service');
                 redirect('home');
                 return;
             }
             
             $status = $decode['status'];
             $message = $decode['message'];
-            $data = $decode['data'];
+            $data = isset($decode['data']) ? $decode['data'] : null;
             
             // Log the API response
             log_message('info', "Deposit API response - Transaction: {$transaction_id}, Status: {$status}, Message: {$message}");
             
-            if($status == 'fail') {
-                log_message('error', "Deposit failed - Transaction: {$transaction_id}, Message: {$message}");
-                $this->session->set_flashdata('msg', $message);
-                redirect('home');
-            } elseif($status == 'success') {
-                log_message('info', "Deposit successful - Transaction: {$transaction_id}, Message: {$message}");
-                $this->session->set_flashdata('msg', $message);
-                redirect('home');
-            } elseif($status == 'error') {
-                log_message('error', "Deposit error - Transaction: {$transaction_id}, Message: {$message}");
-                $this->session->set_flashdata('msg', $message);
-                redirect('home');
-            } else {
-                log_message('error', "Unknown deposit status - Transaction: {$transaction_id}, Status: {$status}, Response: " . json_encode($decode));
-                $this->session->set_flashdata('msg', 'Something went wrong');
-                redirect('home');
+            // Handle all possible statuses
+            switch($status) {
+                case 'fail':
+                    log_message('error', "Deposit failed - Transaction: {$transaction_id}, Message: {$message}");
+                    $this->session->set_flashdata('msg', $message);
+                    redirect('home');
+                    break;
+                    
+                case 'success':
+                    log_message('info', "Deposit successful - Transaction: {$transaction_id}, Message: {$message}");
+                    $this->session->set_flashdata('msg', $message);
+                    redirect('home');
+                    break;
+                    
+                case 'error':
+                    log_message('error', "Deposit error - Transaction: {$transaction_id}, Message: {$message}");
+                    $this->session->set_flashdata('msg', $message);
+                    redirect('home');
+                    break;
+                    
+                default:
+                    log_message('error', "Unknown deposit status - Transaction: {$transaction_id}, Status: {$status}, Response: " . json_encode($decode));
+                    $this->session->set_flashdata('msg', 'Unexpected response from deposit service');
+                    redirect('home');
+                    break;
             }
             
         } catch (Exception $e) {
@@ -304,7 +325,7 @@ class Main extends CI_Controller {
             redirect('home');
         }
     }
-
+    
     // Deriv Functions
     public function initiate($amount, $crNumber) {
         $url = APP_INSTANCE.'home_data';
