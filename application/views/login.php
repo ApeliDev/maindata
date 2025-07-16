@@ -304,9 +304,8 @@
             //Deriv Oauth register
             async function initiateDerivOAuth(context = 'register') {
                 try {
-                    showLoadingState('Connecting to Deriv...');
+                    showLoadingState('Redirecting to Deriv...');
                     
-                    // Use relative path to frontend controller which will proxy to backend
                     const response = await fetch('<?php echo base_url() ?>Auth/DerivOAuth', {
                         method: 'GET',
                         headers: {
