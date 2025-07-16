@@ -3,16 +3,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="STEPAKASH - Modern Money Transaction Platform">
+    <meta name="description" content="STEPAKASH - Deriv M-PESA Transfers">
     <meta name="author" content="">
     <title>STEPAKASH</title>
     <!-- manifest meta -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="manifest" href="<?php echo base_url() ?>manifest.json" />
     <!-- Favicons -->
-    <link rel="apple-touch-icon" href="<?php echo base_url() ?>assets/img/stepak_180.png" sizes="180x180">
-    <link rel="icon" href="<?php echo base_url() ?>assets/img/stepak_32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="<?php echo base_url() ?>assets/img/stepak_16.png" sizes="16x16" type="image/png">
+    <link rel="apple-touch-icon" href="<?php echo base_url() ?>assets/img/header-icon2.png" sizes="180x180">
+    <link rel="icon" href="<?php echo base_url() ?>assets/img/header-icon2.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="<?php echo base_url() ?>assets/img/header-icon2.png" sizes="16x16" type="image/png">
     <!-- Google fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -53,7 +53,7 @@
             <div class="auth-form-container">
                 <div class="auth-container">
                     <div class="auth-logo">
-                        <img src="<?php echo base_url() ?>assets/img/login-icon.png" alt="STEPAKASH Logo" />
+                        <img src="<?php echo base_url() ?>assets/img/login-icon2.png" alt="STEPAKASH Logo" />
                     </div>
                     
                     <div class="form-tab-switcher">
@@ -107,8 +107,8 @@
                             <span class="divider-text">OR</span>
                         </div>
                         <div class="deriv-login-container">
-                            <button class="btn btn-deriv w-100" id="derivLoginBtn">
-                                <i class="fab fa-connectdevelop me-2"></i> Sign in with Deriv
+                            <button class="btn btn-deriv w-100" id="derivRegisterBtn">
+                                <i class="fab fa-connectdevelop me-2"></i> Sign up with Deriv
                             </button>
                             <p class="small mt-2">By connecting your Deriv account, you agree to our <a href="<?php echo base_url() ?>terms" class="text-decoration-none">Terms</a> and <a href="<?php echo base_url() ?>privacy" class="text-decoration-none">Privacy Policy</a></p>
                         </div>
@@ -200,6 +200,10 @@
             // Deriv OAuth Integration
             document.getElementById('derivLoginBtn').addEventListener('click', function() {
                 initiateDerivOAuth('login');
+            });
+
+            document.getElementById('derivRegisterBtn').addEventListener('click', function() {
+                initiateDerivOAuth('register');
             });
 
             // UI Helper Functions
@@ -296,7 +300,45 @@
                     console.error('Deriv OAuth error:', error);
                 }
             }
+
+            //Deriv Oauth register
+            async function initiateDerivOAuth(context = 'register') {
+                try {
+                    showLoadingState('Connecting to Deriv...');
+                    
+                    // Use relative path to frontend controller which will proxy to backend
+                    const response = await fetch('<?php echo base_url() ?>Auth/DerivOAuth', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    
+                    if (data.status === 'success') {
+                        // Redirect to Deriv OAuth
+                        window.location.href = data.oauth_url;
+                    } else {
+                        hideLoadingState();
+                        showError('Failed to connect to Deriv: ' + (data.message || 'Unknown error'));
+                    }
+                    
+                } catch (error) {
+                    hideLoadingState();
+                    showError('Network error. Please try again.');
+                    console.error('Deriv OAuth error:', error);
+                }
+            }
+
         });
+
+
+
     </script>
     <!-- Required jquery and libraries -->
     <script src="<?php echo base_url() ?>assets/js/jquery-3.3.1.min.js"></script>
