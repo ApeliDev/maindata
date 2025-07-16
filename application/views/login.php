@@ -10,7 +10,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="manifest" href="<?php echo base_url() ?>manifest.json" />
     <!-- Favicons -->
-    <link rel="apple-touch-icon" href="<?php echo base_url() ?>assets/img/header-icon2.png" sizes="180x180">
+    <link rel="apple-touch-icon" href="<?php echo base_url() ?>assets/img/header-icon.png" sizes="180x180">
     <link rel="icon" href="<?php echo base_url() ?>assets/img/header-icon2.png" sizes="32x32" type="image/png">
     <link rel="icon" href="<?php echo base_url() ?>assets/img/header-icon2.png" sizes="16x16" type="image/png">
     <!-- Google fonts-->

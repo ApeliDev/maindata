@@ -1,25 +1,30 @@
-'use strict'
-/* PWA services worker register */
-if ("serviceWorker" in navigator) {
-    window.addEventListener("load", function (event) {
-        navigator.serviceWorker
-            .register("https://stepakash.com/serviceWorker.js", {
-            //.register("https://maxartkiller.com/website/finwallapp2/HTML/serviceWorker.js", {
+// Register Service Worker
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', async () => {
+        try {
+            const registration = await navigator.serviceWorker.register('/serviceWorker.js', {
                 scope: './'
-            })
-            .then(reg => console.log("service worker registered"))
-            .catch(err => console.log("service worker not registered"));
+            });
+            console.log('Service Worker registered:', registration);
+        } catch (error) {
+            console.error('Service Worker registration failed:', error);
+        }
     });
 }
 
-window.addEventListener("appinstalled", function (event) {
-    //app.logEvent("a2hs", "Installed");
-    document.getElementById('toastinstall').style.display = 'none';
+// Handle app installation event
+window.addEventListener('appinstalled', () => {
+    document.getElementById('toastinstall')?.style?.display = 'none';
 });
 
+// Handle install banner visibility based on display mode
+const updateInstallToast = () => {
+    const isFullscreen = window.matchMedia('(display-mode: fullscreen)').matches;
+    const toast = document.getElementById('toastinstall');
+    if (toast) {
+        isFullscreen ? $(toast).fadeOut() : $(toast).fadeIn();
+    }
+};
 
-if (window.matchMedia('(display-mode: fullscreen)').matches) {
-    $('#toastinstall').fadeOut()
-} else {
-    $('#toastinstall').fadeIn()
-}
+window.addEventListener('DOMContentLoaded', updateInstallToast);
+window.matchMedia('(display-mode: fullscreen)').addEventListener('change', updateInstallToast);

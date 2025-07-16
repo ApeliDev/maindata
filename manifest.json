@@ -8,23 +8,23 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "assets/img/stepak_72.png",
+      "src": "assets/img/header-icon.png",
       "type": "image/png", "sizes": "72x72"
     },
     {
-      "src": "assets/img/stepak_96.png",
+      "src": "assets/img/header-icon.png",
       "type": "image/png", "sizes": "96x96"
     },
     {
-      "src": "assets/img/stepak_32.png",
+      "src": "assets/img/header-icon.png",
       "type": "image/png", "sizes": "32x32"
     },
     {
-      "src": "assets/img/stepak_16.png",
+      "src": "assets/img/header-icon.png",
       "type": "image/png", "sizes": "16x16"
     },
     {
-      "src": "assets/img/stepak_180.png",
+      "src": "assets/img/header-icon.png",
       "type": "image/png", "sizes": "180x180"
     }
 
