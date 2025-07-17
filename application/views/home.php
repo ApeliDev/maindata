@@ -300,22 +300,10 @@ if(!empty($checkout_token))
                             echo date('H:i');
                         ?>
                         <br>
-                       
+                        <span class="text-xs text-gray-200">Powered by StepaKash</span>
                     </span>
-                    <button class="text-white text-sm flex items-center">
-                        <i class="fas fa-sync-alt mr-1 animate-spin-slow"></i> <?php echo htmlspecialchars($this->session->userdata('fullname')); ?>
-                    </button>
-                </div>  <script>
-                    document.querySelector('.fa-sync-alt').parentElement.addEventListener('click', function() {
-                        // Add spinning animation
-                        this.querySelector('.fa-sync-alt').classList.add('fa-spin');
-                        
-                        // Refresh the page after a short delay
-                        setTimeout(() => {
-                            location.reload();
-                        }, 500);
-                    });
-                </script>
+                    
+                </div>
             </div>
 
            <!--Flash Message -->
