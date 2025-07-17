@@ -7,7 +7,7 @@ $session_id = $this->session->userdata('session_id');
 
 $phone_session = $this->session->userdata('phone');
 
-$username = $this->session->userdata('fullname');
+$fullname = $this->session->userdata('fullname');
 
 $checkout_token = $this->session->userdata('checkout_token');
 
@@ -300,7 +300,7 @@ if(!empty($checkout_token))
                             echo date('H:i');
                         ?>
                         <br>
-                        <span class="text-xs text-gray-200">Powered by StepaKash</span>
+                        <span class="text-xs text-gray-200"><?php echo $this->session->userdata('fullname'); ?></span>
                     </span>
                     
                 </div>
