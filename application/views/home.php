@@ -12,7 +12,7 @@ $username = $this->session->userdata('fullname');
 $checkout_token = $this->session->userdata('checkout_token');
 
 
-if(!$wallet_id || !$session_id  || !$phone_session)
+if(!$wallet_id || !$phone_session)
 
 {
 
