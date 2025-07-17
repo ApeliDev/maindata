@@ -303,7 +303,7 @@ if(!empty($checkout_token))
                        
                     </span>
                     <button class="text-white text-sm flex items-center">
-                        <i class="fas fa-sync-alt mr-1 animate-spin-slow"></i><?php echo $this->session->userdata('phone'); ?>
+                        <?php echo $this->session->userdata('phone'); ?>
                     </button>
                 </div> 
             </div>
