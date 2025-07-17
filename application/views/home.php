@@ -300,10 +300,10 @@ if(!empty($checkout_token))
                             echo date('H:i');
                         ?>
                         <br>
-                       <?php echo htmlspecialchars($this->session->userdata('fullname')); ?>
+                       
                     </span>
                     <button class="text-white text-sm flex items-center">
-                        <i class="fas fa-sync-alt mr-1 animate-spin-slow"></i> Refresh
+                        <i class="fas fa-sync-alt mr-1 animate-spin-slow"></i> <?php echo htmlspecialchars($this->session->userdata('fullname')); ?>
                     </button>
                 </div>  <script>
                     document.querySelector('.fa-sync-alt').parentElement.addEventListener('click', function() {
