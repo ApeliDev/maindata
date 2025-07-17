@@ -274,8 +274,6 @@
             async function initiateDerivOAuth(context = 'login') {
                 try {
                     showLoadingState('Connecting to Deriv...');
-                    
-                    // Use relative path to frontend controller which will proxy to backend
                     const response = await fetch('<?php echo base_url() ?>Auth/DerivOAuth', {
                         method: 'GET',
                         headers: {

@@ -7,6 +7,8 @@ $session_id = $this->session->userdata('session_id');
 
 $phone_session = $this->session->userdata('phone');
 
+$username = $this->session->userdata('fullname');
+
 $checkout_token = $this->session->userdata('checkout_token');
 
 
@@ -297,11 +299,13 @@ if(!empty($checkout_token))
                             date_default_timezone_set('Africa/Nairobi');
                             echo date('H:i');
                         ?>
-                    </span>  <button class="text-white text-sm flex items-center">
+                        <br>
+                       <?php echo htmlspecialchars($this->session->userdata('fullname')); ?>
+                    </span>
+                    <button class="text-white text-sm flex items-center">
                         <i class="fas fa-sync-alt mr-1 animate-spin-slow"></i> Refresh
                     </button>
-                </div>
-                <script>
+                </div>  <script>
                     document.querySelector('.fa-sync-alt').parentElement.addEventListener('click', function() {
                         // Add spinning animation
                         this.querySelector('.fa-sync-alt').classList.add('fa-spin');
@@ -338,7 +342,7 @@ if(!empty($checkout_token))
                 <!-- Fund Wallet -->
                 <button data-modal-target="depositMpesaModal" data-modal-toggle="depositMpesaModal" class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm quick-action-hover border border-gray-100 dark:border-gray-700 flex flex-col items-center">
                     <div class="w-14 h-14 bg-gradient-primary rounded-full flex items-center justify-center text-white mb-3">
-                        <img src="<?php echo base_url() ?>assets/img/stepakash-wallet.png" alt="Deposit" class="w-8 h-8">
+                        <img src="<?php echo base_url() ?>assets/img/login-icon2.png" alt="Deposit" class="w-8 h-8">
                     </div>
                     <span class="text-sm font-medium text-gray-700 dark:text-gray-300 text-center">Fund Wallet</span>
                 </button>
