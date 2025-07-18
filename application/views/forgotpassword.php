@@ -139,7 +139,7 @@
                 if (isValid) {
                     // Show loading state
                     resetBtn.classList.add('loading');
-                    resetBtn.querySelector('.btn-text').textContent = 'Sending Code...';
+                    resetBtn.querySelector('.btn-text').textContent = 'Requesting Code...';
                     resetBtn.disabled = true;
                 } else {
                     e.preventDefault();

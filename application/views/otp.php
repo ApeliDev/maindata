@@ -30,7 +30,7 @@
             <div class="col-12 col-lg-6">
                 <div class="auth-container mb-4">
                     <div class="auth-logo">
-                        <img src="<?php echo base_url() ?>assets/img/login-icon.png" alt="STEPAKASH Logo" />
+                        <img src="<?php echo base_url() ?>assets/img/login-icon2.png" alt="STEPAKASH Logo" />
                     </div>
                     <h2 class="auth-title">OTP Verification</h2>
                     <p class="auth-subtitle">Enter the verification code sent to your phone</p>
@@ -62,7 +62,7 @@
                     </form>
 
                     <div class="back-to-login">
-                        <a href="<?php echo base_url() ?>login">Back to Sign In</a>
+                        <a href="<?php echo base_url() ?>login">Back to Login</a>
                     </div>
                 </div>
             </div>
