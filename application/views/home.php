@@ -589,7 +589,7 @@ if(!empty($checkout_token))
                         <span class="sr-only">Close modal</span>
                     </button>
                 </div>
-                <form method="POST" action="<?php echo base_url() ?>Main/WithdrawFromDeriv" onsubmit="return disableSubmitButtonWithdraw()">
+                <form id="withdrawalForm" method="POST">
                     <div class="p-4 md:p-5 space-y-4">
                         <div>
                             <label for="crNumberWithdraw" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CR Number</label>
@@ -598,12 +598,25 @@ if(!empty($checkout_token))
                         </div>
                         <div>
                             <label for="amountWithdraw" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount (USD)</label>
-                            <input type="number" id="amountWithdraw" name="deriv_amount" step="0.01" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Enter amount in USD" required>
+                            <input type="number" id="amountWithdraw" name="deriv_amount" step="0.01" min="10" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Enter amount in USD" required>
                             <div class="error-message-amount-withdraw text-red-500 text-xs mt-1"></div>
+                        </div>
+                        <div id="rateInfo" class="mt-4 p-3 bg-gray-100 rounded-lg dark:bg-gray-800 hidden">
+                            <h4 class="font-medium mb-2">Withdrawal Details</h4>
+                            <div class="grid grid-cols-2 gap-2 text-sm">
+                                <div>Exchange Rate:</div>
+                                <div class="text-right" id="rateDisplay">1 USD = 0.00 KES</div>
+                                <div>Service Charge:</div>
+                                <div class="text-right" id="chargeDisplay">0% + 0.00 USD</div>
+                                <div>Total Charge:</div>
+                                <div class="text-right" id="totalChargeDisplay">0.00 USD</div>
+                                <div class="font-medium">You'll receive:</div>
+                                <div class="font-medium text-right" id="netAmountDisplay">0.00 KES</div>
+                            </div>
                         </div>
                     </div>
                     <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                        <button type="submit" id="withdrawButton" disabled class="text-white bg-gradient-primary hover:opacity-90 focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:opacity-50 disabled:cursor-not-allowed">
+                        <button type="submit" id="withdrawButton" class="text-white bg-gradient-primary hover:opacity-90 focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:opacity-50 disabled:cursor-not-allowed">
                             Withdraw
                         </button>
                         <button data-modal-hide="withdrawModal" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
@@ -657,5 +670,107 @@ if(!empty($checkout_token))
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <!-- jsPDF for PDF generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const withdrawalForm = document.getElementById('withdrawalForm');
+    
+    // Handle withdrawal form submission
+    withdrawalForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const crNumber = document.getElementById('crNumberWithdraw').value;
+        const amount = document.getElementById('amountWithdraw').value;
+        const sessionId = '<?php echo $this->session->userdata("session_id"); ?>';
+        
+        // Disable button and show loading
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+        
+        // Make AJAX request
+        fetch('<?php echo base_url("Main/WithdrawFromDeriv"); ?>', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `session_id=${encodeURIComponent(sessionId)}&crNumber=${encodeURIComponent(crNumber)}&amount=${encodeURIComponent(amount)}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                // Show success message
+                alert(data.message);
+                
+                // Close modal and refresh page
+                const modal = bootstrap.Modal.getInstance(document.getElementById('withdrawModal'));
+                if (modal) modal.hide();
+                location.reload();
+            } else {
+                // Show error message
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Network error. Please check your connection and try again.');
+        })
+        .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = 'Withdraw';
+        });
+    });
+
+    // Verify Deriv token when modal is shown
+    document.getElementById('withdrawModal').addEventListener('shown.bs.modal', function() {
+        const sessionId = '<?php echo $this->session->userdata("session_id"); ?>';
+        
+        fetch('<?php echo base_url("Main/verifyDerivToken"); ?>', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `session_id=${encodeURIComponent(sessionId)}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status !== 'success') {
+                alert(data.message);
+                const modal = bootstrap.Modal.getInstance(document.getElementById('withdrawModal'));
+                if (modal) modal.hide();
+            }
+        });
+    });
+
+    // Calculate and display rates when amount changes
+    document.getElementById('amountWithdraw').addEventListener('input', function() {
+        const amount = parseFloat(this.value);
+        if (isNaN(amount)) return;
+        
+        // Get rates via AJAX
+        fetch('<?php echo base_url("Main/getDerivRates"); ?>')
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                const rate = data.data.deriv_sell;
+                const charge = data.data.deriv_sell_charge;
+                const fee = data.data.deriv_sell_fee;
+                
+                // Calculate amounts
+                const amountKES = amount * rate;
+                const chargeAmount = amount * (charge / 100);
+                const totalCharge = chargeAmount + fee;
+                const netAmountKES = amountKES - totalCharge;
+                
+                // Update display
+                document.getElementById('rateDisplay').textContent = `1 USD = ${rate.toFixed(2)} KES`;
+                document.getElementById('chargeDisplay').textContent = `${charge}% + ${fee.toFixed(2)} USD`;
+                document.getElementById('totalChargeDisplay').textContent = `${totalCharge.toFixed(2)} USD`;
+                document.getElementById('netAmountDisplay').textContent = `${netAmountKES.toFixed(2)} KES`;
+                document.getElementById('rateInfo').classList.remove('hidden');
+            }
+        });
+    });
+});
+    </script>
 </body>
 </html>
