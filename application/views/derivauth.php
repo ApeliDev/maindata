@@ -31,7 +31,7 @@
             <div class="auth-feature-panel">
                 <div class="auth-feature-content">
                     <h2>Connect Your Deriv Account</h2>
-                    <p>Authorize STEPAKASH to access your Deriv account to enable seamless transactions.</p>
+                    <p>Authorize StepaKash to access your Deriv account to enable seamless transactions.</p>
                     <ul class="auth-feature-list">
                         <li>
                             <i class="fas fa-user-plus"></i>
@@ -58,14 +58,14 @@
                     
                     <div class="text-center">
                         <h4 class="auth-title mb-3">Connect Deriv Account</h4>
-                        <p class="auth-subtitle mb-4">First step to create your STEPAKASH account</p>
+                        <p class="auth-subtitle mb-4">First step to create your StepaKash account</p>
                         
                         <div class="deriv-login-container">
                             <button class="btn btn-deriv w-100" id="derivSignupBtn">
                                 <i class="fab fa-connectdevelop me-2"></i> Authorize Deriv
                             </button>
                             <p class="small mt-3">
-                                By connecting, you authorize STEPAKASH to access your Deriv account information 
+                                By connecting, you authorize StepaKash to access your Deriv account information 
                                 for transaction purposes.
                             </p>
                             
@@ -76,7 +76,7 @@
                     </div>
                     
                     <div class="auth-footer">
-                        © <?php echo date('Y'); ?> STEPAKASH. All rights reserved.
+                        © <?php echo date('Y'); ?> StepaKash. All rights reserved.
                     </div>
                 </div>
             </div>
