@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="STEPAKASH - Modern Money Transaction Platform">
     <meta name="author" content="">
-    <title>STEPAKASH - Connect Deriv Account</title>
+    <title>StepaKash - Connect Deriv Account</title>
     <!-- manifest meta -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="manifest" href="<?php echo base_url() ?>manifest.json" />

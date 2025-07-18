@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="STEPAKASH - Deriv M-PESA Transfers">
+    <meta name="description" content="StepaKash - Deriv M-PESA Transfers">
     <meta name="author" content="">
-    <title>STEPAKASH</title>
+    <title>StepaKash</title>
     <!-- manifest meta -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="manifest" href="<?php echo base_url() ?>manifest.json" />
@@ -30,7 +30,7 @@
             <!-- Left Feature Panel -->
             <div class="auth-feature-panel">
                 <div class="auth-feature-content">
-                    <h2>Welcome Back to STEPAKASH</h2>
+                    <h2>Welcome Back to StepaKash</h2>
                     <p>Log in to manage your Deriv payments with M-Pesa — deposit or withdraw seamlessly.</p>
                     <ul class="auth-feature-list">
                         <li>
@@ -57,7 +57,7 @@
                     </div>
                     
                     <div class="form-tab-switcher">
-                        <div class="form-tab active">Sign In</div>
+                        <div class="form-tab active">Login</div>
                         <a href="<?php echo base_url() ?>derivauth" class="form-tab">Create Account</a>
                     </div>
                     
@@ -97,7 +97,7 @@
                             <div class="d-grid gap-2">
                                 <button type="submit" class="btn btn-primary" id="loginBtn">
                                     <span class="spinner"></span>
-                                    <span class="btn-text">Sign In</span>
+                                    <span class="btn-text">Login</span>
                                 </button>
                             </div>
                         </form>
@@ -118,7 +118,7 @@
                     </div>
                     
                     <div class="auth-footer">
-                        © <?php echo date('Y'); ?> STEPAKASH. All rights reserved.
+                        © <?php echo date('Y'); ?> StepaKash. All rights reserved.
                     </div>
                 </div>
             </div>

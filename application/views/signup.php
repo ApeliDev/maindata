@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="STEPAKASH - Modern Money Transaction Platform">
     <meta name="author" content="">
-    <title>STEPAKASH - Complete Registration</title>
+    <title>StepaKash - Complete Registration</title>
     <!-- manifest meta -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="manifest" href="<?php echo base_url() ?>manifest.json" />
@@ -31,7 +31,7 @@
             <div class="auth-feature-panel">
                 <div class="auth-feature-content">
                     <h2>Complete Your Registration</h2>
-                    <p>Just a few more details to create your STEPAKASH account and start transacting.</p>
+                    <p>Just a few more details to create your StepaKash account and start transacting.</p>
                     <ul class="auth-feature-list">
                         <li>
                             <i class="fas fa-check-circle"></i>
@@ -39,7 +39,7 @@
                         </li>
                         <li>
                             <i class="fas fa-user-plus"></i>
-                            <span>Create your STEPAKASH profile</span>
+                            <span>Create your StepaKash profile</span>
                         </li>
                         <li>
                             <i class="fas fa-mobile-alt"></i>
@@ -57,11 +57,11 @@
             <div class="auth-form-container">
                 <div class="auth-container">
                     <div class="auth-logo">
-                        <img src="<?php echo base_url() ?>assets/img/login-icon.png" alt="STEPAKASH Logo" />
+                        <img src="<?php echo base_url() ?>assets/img/login-icon2.png" alt="STEPAKASH Logo" />
                     </div>
                     
                     <div class="form-tab-switcher">
-                        <a href="<?php echo base_url() ?>login" class="form-tab">Sign In</a>
+                        <a href="<?php echo base_url() ?>login" class="form-tab">Login</a>
                         <div class="form-tab active">Create Account</div>
                     </div>
                     
@@ -137,7 +137,7 @@
                     </form>
                     
                     <div class="auth-footer">
-                        © <?php echo date('Y'); ?> STEPAKASH. All rights reserved.
+                        © <?php echo date('Y'); ?> StepaKash. All rights reserved.
                     </div>
                 </div>
             </div>

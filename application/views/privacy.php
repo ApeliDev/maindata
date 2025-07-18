@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - STEPAKASH</title>
+    <title>Privacy Policy - StepaKash</title>
     <style>
         * {
             margin: 0;
@@ -373,13 +373,13 @@
                 <h3>Contact Us</h3>
                 <p>If you have any questions about this Privacy Policy or wish to exercise your rights, please contact us at:</p>
                 <p><strong>Email:</strong> info@stepakash.com</p>
-                <p><strong>Phone:</strong> +254 703 416 091</p>
+                <p><strong>Phone:</strong> +254 741 554 994</p>
                 <p><strong>Address:</strong> Nairobi, Kenya</p>
             </div>
         </div>
         
         <div class="footer">
-            <p>&copy; <?php echo date('Y'); ?> STEPAKASH. All rights reserved. | Last updated: <?php echo date('F j, Y'); ?></p>
+            <p>&copy; <?php echo date('Y'); ?> StepaKash. All rights reserved. | Last updated: <?php echo date('F j, Y'); ?></p>
         </div>
     </div>
 </body>

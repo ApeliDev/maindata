@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="STEPAKASH - Forgot Password">
     <meta name="author" content="">
-    <title>Forgot Password | STEPAKASH</title>
+    <title>Forgot Password | StepaKash</title>
     <!-- manifest meta -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="manifest" href="<?php echo base_url() ?>manifest.json" />
@@ -32,7 +32,7 @@
             <div class="auth-feature-panel">
                 <div class="auth-feature-content">
                     <h2>Reset Your Password</h2>
-                    <p>Secure and quick password recovery for your STEPAKASH account.</p>
+                    <p>Secure and quick password recovery for your StepaKash account.</p>
                     <ul class="auth-feature-list">
                         <li>
                             <i class="fas fa-shield-alt"></i>
@@ -96,13 +96,13 @@
                     <div class="auth-links">
                         <div class="back-to-login">
                             <a href="<?php echo base_url() ?>login" class="text-decoration-none">
-                                <i class="fas fa-arrow-left me-2"></i>Back to Sign In
+                                <i class="fas fa-arrow-left me-2"></i>Back to Login
                             </a>
                         </div>
                     </div>
                     
                     <div class="auth-footer">
-                        © <?php echo date('Y'); ?> STEPAKASH. All rights reserved.
+                        © <?php echo date('Y'); ?> StepaKash. All rights reserved.
                     </div>
                 </div>
             </div>
