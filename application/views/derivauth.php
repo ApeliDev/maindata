@@ -53,7 +53,7 @@
             <div class="auth-form-container">
                 <div class="auth-container">
                     <div class="auth-logo">
-                        <img src="<?php echo base_url() ?>assets/img/login-icon.png" alt="STEPAKASH Logo" />
+                        <img src="<?php echo base_url() ?>assets/img/login-icon2.png" alt="STEPAKASH Logo" />
                     </div>
                     
                     <div class="text-center">
