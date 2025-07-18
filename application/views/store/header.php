@@ -1,719 +1,776 @@
+
+
 <?php
-
-
-
 $wallet_id = $this->session->userdata('wallet_id');
 
 $session_id = $this->session->userdata('session_id');
 
 $phone_session = $this->session->userdata('phone');
 
-$agent = $this->session->userdata('agent');
-// $checkout_token = $this->session->userdata('checkout_token');
+
+$checkout_token = $this->session->userdata('checkout_token');
 
 
-if(!$wallet_id || !$session_id|| !$phone_session)
+if(!$wallet_id || !$session_id  || !$phone_session)
 
 {
 
     redirect('logout');
 
 }
-// if(!empty($checkout_token))
-// {
-//     redirect('payment_form');
-// }
+if(!empty($checkout_token))
+{
+    redirect('payment_form');
+}
 
 ?>
 
 <!doctype html>
-
-<html lang="en">
-
-
-
+<html lang="en" data-theme="light">
 <head>
-
     <meta charset="utf-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <meta name="description" content="">
-
+    <meta name="description" content="Mobile Money Interface">
     <meta name="author" content="">
-
-    <meta name="generator" content="">
-
     <title>STEPAKASH</title>
 
-
-
     <!-- manifest meta -->
-
     <meta name="apple-mobile-web-app-capable" content="yes">
-
     <link rel="manifest" href="<?php echo base_url() ?>manifest.json" />
 
-
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css"> -->
-
     <!-- Favicons -->
-
-
-    <!-- <link rel="apple-touch-icon" href="<?php echo base_url() ?>assets/img/favicon180.png" sizes="180x180">
-
-    <link rel="icon" href="<?php echo base_url() ?>assets/img/favicon32.png" sizes="32x32" type="image/png">
-
-    <link rel="icon" href="<?php echo base_url() ?>assets/img/favicon16.png" sizes="16x16" type="image/png"> -->
-
     <link rel="apple-touch-icon" href="<?php echo base_url() ?>assets/img/stepak_180.png" sizes="180x180">
-
-<link rel="icon" href="<?php echo base_url() ?>assets/img/stepak_32.png" sizes="32x32" type="image/png">
-
-<link rel="icon" href="<?php echo base_url() ?>assets/img/stepak_16.png" sizes="16x16" type="image/png">
+    <link rel="icon" href="<?php echo base_url() ?>assets/img/stepak_32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="<?php echo base_url() ?>assets/img/stepak_16.png" sizes="16x16" type="image/png">
 
     <!-- Google fonts-->
-
     <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-
-      <!-- Include html2canvas library -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
-    <!-- Include jsPDF library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-
-
-    <!-- swiper carousel css -->
-
-    <link rel="stylesheet" href="<?php echo base_url() ?>assets/vendor/swiperjs-6.6.2/swiper-bundle.min.css">
-
-    <!-- style css for this template -->
-
-    <link href="<?php echo base_url() ?>assets/css/style.css" rel="stylesheet" id="style">
-
-
-
-    <style>
-
-    
-
-        #whatsapp-icon {
-
-    position: fixed;
-
-    bottom: 70px;
-
-    right: 70px;
-
-    z-index: 1000; /* Make sure it's above other elements on the page */
-
-    }
-
-    
-
-    #whatsapp-icon {
-
-        width: 200px; /* Adjust the size as needed */
-
-        height: 200px;
-
-        border-radius: 50%;
-
-        font-size: 24px;
-
-    }
-
-    
-
-        .scrollable-list {
-
-            max-height: 300px; /* Adjust the maximum height as needed */
-
-            overflow-y: auto;
-
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#059669', 
+                            dark: '#10b981',   
+                        },
+                        secondary: {
+                            DEFAULT: '#065f46', // Emerald-700
+                            dark: '#047857',    // Emerald-600
+                        },
+                        accent: {
+                            DEFAULT: '#b59a3e', // Custom gold
+                            dark: '#d4af37',    // Rich gold
+                        },
+                        dark: {
+                            DEFAULT: '#1e293b', // Slate-800
+                            light: '#334155',   // Slate-700
+                        },
+                        light: {
+                            DEFAULT: '#f8fafc', // Slate-50
+                            dark: '#e2e8f0',    // Slate-200
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.02)',
+                        'hard': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                        'glow': '0 0 10px 2px rgba(181, 154, 62, 0.3)',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'bounce-slow': 'bounce 2s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'shimmer': 'shimmer 2s infinite linear',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' },
+                        }
+                    }
+                }
+            }
         }
-
-
-
-/* Modal styling */
-
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Translucent background */
-    z-index: 999;
-}
-
-.modal-dialog {
-    position: absolute;
-    max-width: 500px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: 0 auto;
-}
-
-
-
-.modal-content {
-    border: none;
-    height: 100%;
-    margin: 5px; /* Adjust margin size as needed */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
-}
-
-
-
-
-
-/* Close button (X) styling */
-
-.close {
-
-    float: right;
-
-    cursor: pointer;
-
-    font-size: 24px;
-
-    margin: -10px -10px 0 0;
-
-}
-
-
-
-/* Style for the deposit button */
-
-#depositButton,#withdrawDerivBut,#depositMpesaBot,#withdrawMpesaBot {
-
-    cursor: pointer;
-
-}
-
-
-
-.form-control {
-
-    border-radius: 50px; /* Makes the inputs rounded */
-
-    padding: 10px; /* Adds padding for spacing */
-
-}
-
-
-
-.btn-sm {
-
-    padding: 10px 20px; /* Adjust button padding to make it smaller */
-
-}
-
-/* Add margins for spacing */
-
-.mb-3 {
-
-    margin-bottom: 1rem; /* Adjust as needed */
-
-}
-
-.text-center {
-
-    text-align: center;
-
-}
-
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            }
+            .gradient-text {
+                @apply bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent;
+            }
+            .bg-gradient-primary {
+                @apply bg-gradient-to-br from-primary to-secondary;
+            }
+            .bg-gradient-accent {
+                @apply bg-gradient-to-br from-accent to-yellow-400;
+            }
+            .sidebar-transition {
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .fade-transition {
+                transition: opacity 0.3s ease-in-out;
+            }
+            .card-hover {
+                @apply transition-all duration-300 ease-in-out hover:scale-[1.02] hover:shadow-lg;
+            }
+            .menu-item-hover {
+                @apply transition-all duration-200 hover:bg-opacity-10 hover:bg-primary hover:text-primary hover:pl-6;
+            }
+            .btn-hover {
+                @apply transition-all duration-200 hover:scale-105 hover:shadow-md;
+            }
+            .quick-action-hover {
+                @apply transition-all duration-300 hover:scale-105 hover:shadow-lg hover:border-accent;
+            }
+            .shimmer-bg {
+                background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+                background-size: 200% 100%;
+            }
+        }
     </style>
-
-
-<style>
-    
-    /* styles.css */
-    .receipt {
-    max-width: 500px;
-    margin: 0 auto; /* Center horizontally */
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    box-sizing: border-box;
-    margin-bottom: 10px; /* Reduce margin from bottom */
-    position: relative; /* Positioning context for footer image */
-}
-
-.receipt-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.receipt-header img {
-    height: 30px;
-    width: auto;
-}
-
-.receipt-header h3 {
-    margin: 0;
-    font-size: 14px;
-    color: #333;
-}
-
-.receipt-header p {
-    margin: 5px 0;
-    font-size: 18px;
-    color: #666;
-}
-
-.receipt-body {
-    margin-bottom: 20px;
-}
-
-.receipt-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-.receipt-col {
-    flex: 0 0 48%;
-}
-
-.receipt-item {
-    margin-bottom: 10px;
-}
-
-.receipt-item label {
-    font-weight: bold;
-    color: #333;
-    display: block;
-    margin-bottom: 5px;
-}
-
-.receipt-item span {
-    color: #666;
-}
-
-.receipt-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: #666;
-    font-size: 12px;
-    position: relative; /* Ensure proper positioning for footer image */
-}
-
-.receipt-footer button {
-    padding: 5px;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-}
-
-.receipt-footer button i {
-    font-size: 24px;
-}
-
-.footer-image {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: auto;
-}
-
-
-    /* Example CSS to style the icon */
-
-/* CSS for the verification badge */
-.verification-badge {
-    display: inline-block;
-    width: 30px; /* Adjust size as needed */
-    height: 30px; /* Adjust size as needed */
-    border-radius: 50%; /* Round shape */
-    background-color: #4CAF50; /* Greenish color */
-    position: relative;
-    overflow: hidden;
-    color: #fff; /* Tick color */
-    font-size: 20px; /* Adjust font size */
-    font-weight: bold; /* Ensure the tick is bold */
-    line-height: 30px; /* Center the tick vertically */
-    text-align: center; /* Center the tick horizontally */
-}
-
-/* Pseudo-elements to create the zigzag pattern */
-.verification-badge::before, .verification-badge::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 0 3px 3px;
-    border-color: transparent transparent #fff transparent;
-}
-
-.verification-badge::before {
-    top: 0;
-    left: 0;
-    transform: rotate(45deg);
-}
-
-.verification-badge::after {
-    bottom: 0;
-    right: 0;
-    transform: rotate(-135deg);
-}
-
-/* CSS for the verification text */
-.verification-text {
-    display: block;
-    color: #4CAF50; /* Greenish color */
-    font-size: 14px; /* Adjust font size */
-    text-align: center; /* Center the text */
-}
-
-
-
-    
-        </style>
-
 </head>
 
-
-
-<body class="body-scroll" data-page="index">
-
-
-
-    <!-- loader section -->
-
-    <div class="container-fluid loader-wrap">
-
-        <div class="row h-100">
-
-            <div class="col-10 col-md-6 col-lg-5 col-xl-3 mx-auto text-center align-self-center">
-
-                <div class="logo-wallet">
-
-                    <div class="wallet-bottom">
-
-                    </div>
-
-                    <div class="wallet-cards"></div>
-
-                    <div class="wallet-top">
-
-                    </div>
-
-                </div>
-
-                <p class="mt-4"><span class="text-secondary">STEPAKASH</span><br><strong>Please
-
-                        wait...</strong></p>
-
+<body class="font-sans bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 h-16 bg-white dark:bg-dark shadow-sm z-50 border-b border-gray-100 dark:border-gray-800">
+        <div class="container mx-auto px-4 h-full flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <button id="sidebarToggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
+                    <i class="fas fa-bars text-gray-600 dark:text-gray-300"></i>
+                </button>
             </div>
-
+            
+            <div class="flex-1 flex justify-center">
+                <img src="<?php echo base_url() ?>assets/img/stepakash-home1.png" alt="Stepakash" class="h-8">
+            </div>
+            
+            <div class="flex items-center space-x-3">
+                <div class="relative">
+                    <button id="profileToggle" class="flex items-center space-x-1 p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
+                        <div class="w-8 h-8 rounded-full bg-gradient-primary flex items-center justify-center text-white">
+                            <i class="fas fa-user text-sm"></i>
+                        </div>
+                        <?php if ($agent == 1) : ?>
+                            <span class="absolute -top-1 -right-1 w-4 h-4 bg-accent rounded-full flex items-center justify-center text-xs text-gray-800">✓</span>
+                        <?php endif; ?>
+                    </button>
+                    
+                    <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-100 dark:border-gray-700 z-50 overflow-hidden">
+                        <div class="p-4 border-b border-gray-100 dark:border-gray-700">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-12 h-12 rounded-full bg-gradient-primary flex items-center justify-center text-white">
+                                    <i class="fas fa-user text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-900 dark:text-white"><?php echo $this->session->userdata('phone'); ?></h4>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">Wallet ID: <?php echo $this->session->userdata('wallet_id'); ?></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="py-1">
+                            <a href="<?php echo base_url() ?>logout" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </header>
 
-    </div>
+   
+    <!-- Sidebar -->
+    <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden fade-transition opacity-0"></div>
 
-    <!-- loader section ends -->
-
-
-
-    <!-- Sidebar main menu -->
-
-    <div class="sidebar-wrap  sidebar-overlay">
-
-        <!-- Add pushcontent or fullmenu instead overlay -->
-
-        <div class="closemenu text-muted">Close Menu</div>
-
-        <div class="sidebar ">
-
-            <!-- user information -->
-
-            <div class="row my-3">
-
-                <div class="col-12 profile-sidebar">
-
-                    <div class="clearfix"></div>
-
-                    <div class="circle small one"></div>
-
-                    <div class="circle small two"></div>
-
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-
-                        viewBox="0 0 194.287 141.794" class="menubg">
-
-                        <defs>
-
-                            <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1"
-
-                                gradientUnits="objectBoundingBox">
-
-                                <stop offset="0" stop-color="#09b2fd" />
-
-                                <stop offset="1" stop-color="#6b00e5" />
-
-                            </linearGradient>
-
-                        </defs>
-
-                        <path id="menubg"
-
-                            d="M672.935,207.064c-19.639,1.079-25.462-3.121-41.258,10.881s-24.433,41.037-49.5,34.15-14.406-16.743-50.307-29.667-32.464-19.812-16.308-41.711S500.472,130.777,531.872,117s63.631,21.369,93.913,15.363,37.084-25.959,56.686-19.794,4.27,32.859,6.213,44.729,9.5,16.186,9.5,26.113S692.573,205.985,672.935,207.064Z"
-
-                            transform="translate(-503.892 -111.404)" fill="url(#linear-gradient)" />
-
-                    </svg>
-
-
-
-                    <div class="row mt-3">
-
-                        <div class="col-auto">
-
-                          
-
-                        </div>
-
-                        <div class="col px-0 align-self-center">
-
-                            <h5 class="mb-2">Wallet ID <?php echo  $this->session->userdata('wallet_id'); ?></h5>
-
-                            <p class="text-muted size-12"><?php echo  $this->session->userdata('phone'); ?></p>
-
-                        </div>
-
+    <aside id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-white dark:bg-gray-800 shadow-lg transform -translate-x-full sidebar-transition z-50">
+        <div class="h-full flex flex-col">
+            <!-- Sidebar Header -->
+            <div class="p-4 bg-gradient-to-r from-green-600 to-emerald-500 text-white relative overflow-hidden">
+                <div class="absolute inset-0 shimmer-bg animate-shimmer"></div>
+                <div class="flex items-center space-x-3 relative z-10">
+                    <div class="w-12 h-12 rounded-full bg-white bg-opacity-20 flex items-center justify-center">
+                        <i class="fas fa-wallet text-xl"></i>
                     </div>
-
+                    <div>
+                        <h3 class="font-semibold"><?php echo $this->session->userdata('phone'); ?></h3>
+                        <p class="text-xs opacity-80">Wallet ID: <?php echo $this->session->userdata('wallet_id'); ?></p>
+                    </div>
                 </div>
-
+            </div>  
+            <!-- Sidebar Menu -->
+            <nav class="flex-1 overflow-y-auto py-4">
+                <ul>
+                    <li>
+                        <a href="<?php echo base_url() ?>home" class="flex items-center px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors duration-200">
+                            <i class="fas fa-home mr-3 text-blue-500"></i> 
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url() ?>transactions" class="flex items-center px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors duration-200">
+                            <i class="fas fa-exchange-alt mr-3 text-green-500"></i>
+                            <span>Transactions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url() ?>changepassword" class="flex items-center px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors duration-200">
+                            <i class="fas fa-key mr-3 text-yellow-500"></i>
+                            <span>Change Password</span>
+                        </a>
+                    </li>
+                    <li class="border-t border-gray-200 dark:border-gray-700 mt-2 pt-2">
+                        <a href="<?php echo base_url() ?>logout" class="flex items-center px-6 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 text-red-600 dark:text-red-400 transition-colors duration-200">
+                            <i class="fas fa-sign-out-alt mr-3"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <!-- Sidebar Footer - Contact Info -->
+            <div class="p-4 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex flex-col space-y-3">
+                    <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300">Need Help?</h4>
+                    <a href="https://wa.me/254741554994" target="_blank" class="flex items-center justify-center space-x-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-colors duration-200">
+                        <i class="fab fa-whatsapp text-xl"></i>
+                        <span>Chat on WhatsApp</span>
+                    </a>
+                    <div class="text-xs text-gray-500 dark:text-gray-400 text-center">
+                        <p>Support available 24/7</p>
+                    </div>
+                </div>
             </div>
 
+            <!-- Sidebar Footer - Theme Toggle -->
+            <div class="p-4 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-700 dark:text-gray-300">Dark Mode</span>
+                    <button id="sidebarThemeToggle" class="p-2 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <i class="fas fa-moon text-gray-600 dark:text-yellow-300 theme-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </aside>
 
-
-            <?php
-
-
-
-             // Get the URI segments
-
-        $segments = $this->uri->rsegment_array();
-
-
-
-        // Get the last segment
-
-        $lastSegment = end($segments);
-
-            ?>
-
-
-
-            <!-- user emnu navigation -->
-
-            <div class="row">
-
-                <div class="col-12">
-
-                    <ul class="nav nav-pills">
-
-
-
-                        <li class="nav-item">
-
-                            <a class="nav-link <?php if($lastSegment == 'home') {echo 'active'; }?> " aria-current="page" href="<?php echo base_url() ?>home">
-
-                                <div class="avatar avatar-40 icon"><i class="fa fa-home"></i></div>
-
-                                <div class="col">Home</div>
-
-                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
-
-                            </a>
-
-                        </li>
-
-                        
-
-                        <li class="nav-item">
-
-                            <a class="nav-link <?php if($lastSegment == 'transactions') {echo 'active'; }?>" 
-
-                            aria-current="page" href="<?php echo base_url() ?>transactions">
-
-                                <div class="avatar avatar-40 icon"><i class="fa fa-exchange"></i></div>
-
-                                <div class="col">Transactions</div>
-
-                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
-
-                            </a>
-
-                        </li>
-
-
-
-                       
-
-                        <li class="nav-item">
-
-                            <a class="nav-link <?php if($lastSegment == 'changepassword') {echo 'active'; }?>" 
-
-                            aria-current="page" href="<?php echo base_url() ?>changepassword">
-
-                                <div class="avatar avatar-40 icon"><i class="fa fa-key"></i></div>
-
-                                <div class="col">Change Password</div>
-
-                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
-
-                            </a>
-
-                        </li>
-
-                        
-
-                        <li class="nav-item">
-
-                            <a class="nav-link" 
-
-                            aria-current="page" href="https://chat.whatsapp.com/JNOIFWboogv3TP7LynhE9e">
-
-                                <div class="avatar avatar-40 icon"><i class="fab fa-whatsapp"></i></div>
-
-                                <div class="col">Whatsapp Support</div>
-
-                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
-
-                            </a>
-
-                        </li>
-
+    <!-- Main Content -->
+    <main class="flex-1 pt-16 pb-20 px-4">
+        <div class="container mx-auto max-w-3xl">
+            <!-- Balance Card -->
+            <div class="mt-12"></div>
+            <div class="bg-gradient-primary rounded-xl shadow-lg overflow-hidden mb-6 relative">
+                <div class="absolute inset-0 bg-gradient-to-br from-white to-transparent opacity-10"></div>
+                <div class="p-6 relative z-10">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-white text-opacity-90 text-sm">Total Balance</p>
+                            <h2 id="balanceAmount" class="text-2xl font-bold text-white flex items-center">
+                                KES <?php echo number_format($total_balance, 2, '.', ','); ?>
+                                <img src="https://flagcdn.com/ke.svg" class="w-6 h-4 ml-2 rounded-sm shadow">
+                            </h2>
+                        </div>
+                        <button id="balanceToggle" class="p-1 rounded-full bg-white bg-opacity-20 text-white">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white bg-opacity-10 p-4 flex justify-between items-center">
+                    <span class="text-white text-sm">
+                        Last updated: 
                         <?php
-
-                        if($agent != 1)
-                        {  ?>
-                        <li class="nav-item">
-
-                            <a class="nav-link" 
-
-                            aria-current="page" href="<?php echo base_url() ?>agency">
-
-                                <div class="avatar avatar-40 icon"><i class="fa fa-user"></i></div>
-
-                                <div class="col">Be an Agent & Earn</div>
-
-                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
-
-                            </a>
-
-                        </li>
-                       <?php } ?>
-
-
-                         
-                        <li class="nav-item">
-
-                            <a class="nav-link" href="<?php echo base_url() ?>logout" tabindex="-1">
-
-                                <div class="avatar avatar-40 icon"><i class="fa fa-lock"></i></div>
-
-                                <div class="col">Logout</div>
-
-                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
-
-                            </a>
-
-                        </li>
-
-                    </ul>
-
-                </div>
-
+                            date_default_timezone_set('Africa/Nairobi');
+                            echo date('H:i');
+                        ?>
+                        <br>
+                       
+                    </span>
+                    <button class="text-white text-sm flex items-center">
+                        <?php echo $this->session->userdata('phone'); ?>
+                    </button>
+                </div> 
             </div>
 
-        </div>
+           <!--Flash Message -->
+             <!-- Flash Message -->
+            <?php if ($flash = $this->session->flashdata('msg')) : ?>
+                <div id="flashMessage" class="mb-6 p-4 bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 border-l-4 border-yellow-400 text-yellow-700 dark:text-yellow-200 rounded">
+                    <div class="flex justify-between items-center">
+                        <p><?php echo $flash; ?></p>
+                        <button type="button" class="text-yellow-500 hover:text-yellow-700" onclick="document.getElementById('flashMessage').style.display='none'">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <script>
+                    setTimeout(function() {
+                        var flash = document.getElementById('flashMessage');
+                        if (flash) flash.style.display = 'none';
+                    }, 5000);
+                </script>
+            <?php endif; ?>
 
+            <!-- Quick Actions -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <!-- Fund Wallet -->
+                <button data-modal-target="depositMpesaModal" data-modal-toggle="depositMpesaModal" class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm quick-action-hover border border-gray-100 dark:border-gray-700 flex flex-col items-center">
+                    <div class="w-14 h-14 bg-gradient-primary rounded-full flex items-center justify-center text-white mb-3">
+                        <img src="<?php echo base_url() ?>assets/img/login-icon2.png" alt="Deposit" class="w-8 h-8">
+                    </div>
+                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300 text-center">Fund Wallet</span>
+                </button>
+
+                <!-- Withdraw to Mpesa -->
+                <button data-modal-target="withdrawMpesaModal" data-modal-toggle="withdrawMpesaModal" class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm quick-action-hover border border-gray-100 dark:border-gray-700 flex flex-col items-center">
+                    <div class="w-14 h-14 bg-gradient-primary rounded-full flex items-center justify-center text-white mb-3">
+                        <img src="<?php echo base_url() ?>assets/img/mpesa.png" alt="Withdraw" class="w-8 h-8">
+                    </div>
+                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300 text-center">Withdraw to Mpesa</span>
+                </button>
+
+                <!-- Fund Deriv -->
+                <button data-modal-target="depositModal" data-modal-toggle="depositModal" class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm quick-action-hover border border-gray-100 dark:border-gray-700 flex flex-col items-center">
+                    <div class="w-14 h-14 bg-gradient-primary rounded-full flex items-center justify-center text-white mb-3">
+                        <img src="<?php echo base_url() ?>assets/img/deriv-logo.png" alt="Deposit" class="w-8 h-8">
+                    </div>
+                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300 text-center">Fund Deriv</span>
+                </button>
+
+                <!-- Withdraw from Deriv -->
+                <button data-modal-target="withdrawModal" data-modal-toggle="withdrawModal" class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm quick-action-hover border border-gray-100 dark:border-gray-700 flex flex-col items-center">
+                    <div class="w-14 h-14 bg-gradient-primary rounded-full flex items-center justify-center text-white mb-3">
+                        <img src="<?php echo base_url() ?>assets/img/deriv-logo.png" alt="Withdraw" class="w-8 h-8">
+                    </div>
+                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300 text-center">Withdraw from Deriv</span>
+                </button>
+            </div>
+
+            <!-- Recent Transactions -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden">
+                <div class="p-4 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center">
+                    <h3 class="font-semibold text-gray-800 dark:text-white">Recent Transactions</h3>
+                    <a href="<?php echo base_url() ?>transactions" class="text-sm text-primary dark:text-primary-dark">View All</a>
+                </div>
+                <div class="divide-y divide-gray-100 dark:divide-gray-700">
+                    <?php if ($transactions) : ?>
+                        <?php
+                            $recent_transactions = array_slice($transactions, 0, 10);
+                        ?>
+                        <?php foreach ($recent_transactions as $trans) : ?>
+                            <button data-modal-target="#transactionModal" data-modal-toggle="transactionModal" data-transaction-id="<?php echo $trans['transaction_number']; ?>" class="w-full p-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors cursor-pointer text-left">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-600 flex items-center justify-center mr-3">
+                                            <i class="fas fa-exchange-alt text-gray-500 dark:text-gray-300"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium text-gray-800 dark:text-gray-200"><?php echo $trans['transaction_type']; ?></h4>
+                                            <p class="text-xs text-gray-500 dark:text-gray-400"><?php echo $trans['transaction_number']; ?></p>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="font-medium <?php echo $trans['status_color']; ?>"><?php echo $trans['currency'] . ' ' . $trans['amount']; ?></p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400"><?php echo $trans['created_at']; ?></p>
+                                    </div>
+                                </div>
+                            </button>
+                        <?php endforeach; ?>
+                    <?php else : ?>
+                        <div class="p-8 text-center text-gray-500 dark:text-gray-400">
+                            <i class="fas fa-exchange-alt text-3xl mb-3 opacity-50"></i>
+                            <p>No transactions found</p>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>  </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 shadow-lg border-t border-gray-100 dark:border-gray-700 z-40">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between">
+                <button data-modal-target="mpesaActionsModal" data-modal-toggle="mpesaActionsModal" class="flex flex-col items-center py-3 px-4 text-primary dark:text-primary-dark">
+                    <i class="fas fa-mobile-alt text-lg mb-1"></i>
+                    <span class="text-xs">M-Pesa</span>
+                </button>
+                <a href="<?php echo base_url() ?>home" class="flex flex-col items-center py-3 px-4 text-gray-500 dark:text-gray-400">
+                    <i class="fas fa-home text-lg mb-1"></i>
+                    <span class="text-xs">Home</span>
+                </a>
+                <button data-modal-target="derivActionsModal" data-modal-toggle="derivActionsModal" class="flex flex-col items-center py-3 px-4 text-gray-500 dark:text-gray-400">
+                    <i class="fas fa-exchange-alt text-lg mb-1"></i>
+                    <span class="text-xs">Deriv</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mpesa Actions Modal -->
+    <div id="mpesaActionsModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <div class="p-4 md:p-5 text-center">
+                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">M-Pesa Services</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <button data-modal-target="depositMpesaModal" data-modal-toggle="depositMpesaModal" data-modal-hide="mpesaActionsModal" type="button" class="py-8 px-4 text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-primary focus:z-10 focus:ring-2 focus:ring-primary focus:text-primary dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                            <i class="fas fa-money-bill-wave text-2xl mb-2 text-primary"></i>
+                            <div>Deposit</div>
+                        </button>
+                        <button data-modal-target="withdrawMpesaModal" data-modal-toggle="withdrawMpesaModal" data-modal-hide="mpesaActionsModal" type="button" class="py-8 px-4 text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-primary focus:z-10 focus:ring-2 focus:ring-primary focus:text-primary dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                            <i class="fas fa-wallet text-2xl mb-2 text-primary"></i>
+                            <div>Withdraw</div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Sidebar main menu ends -->
-
-
-
-
-
-    <!-- Begin page -->
-
-    <main class="h-100">
-
-
-
-       <!-- Header -->
-
-
-
-        <!-- Header -->
-
-        <header class="header position-fixed">
-
-            <div class="row">
-
-                <div class="col-auto">
-
-                    <a href="javascript:void(0)" target="_self" class="btn btn-light btn-44 menu-btn">
-
-                        <i class="fa fa-list"></i>
-
-                    </a>
-
-                </div>
-
-                <div class="col text-center">
-
-                    <div class="logo-medium">
-
-                        <img src="<?php echo base_url() ?>assets/img/stepak.png" width="130" alt="" />
-
-                        <h5><span class="text-secondary fw-light"></span><br /></h5>
-
+    <!-- Deriv Actions Modal -->
+    <div id="derivActionsModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <div class="p-4 md:p-5 text-center">
+                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Deriv Services</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <button data-modal-target="depositModal" data-modal-toggle="depositModal" data-modal-hide="derivActionsModal" type="button" class="py-8 px-4 text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-primary focus:z-10 focus:ring-2 focus:ring-primary focus:text-primary dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                            <i class="fas fa-exchange-alt text-2xl mb-2 text-primary"></i>
+                            <div>Fund Deriv</div>
+                        </button>
+                        <button data-modal-target="withdrawModal" data-modal-toggle="withdrawModal" data-modal-hide="derivActionsModal" type="button" class="py-8 px-4 text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-primary focus:z-10 focus:ring-2 focus:ring-primary focus:text-primary dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                            <i class="fas fa-download text-2xl mb-2 text-primary"></i>
+                            <div>Withdraw</div>
+                        </button>
                     </div>
-
                 </div>
-
-
-                <div class="col-auto">
-
-                <?php if ($agent == 1) : ?>
-                    <span class="verification-badge">&#10003;</span>
-                <?php endif; ?>
-                </div>
-
-                <div class="col-auto">
-
-                    <a href="<?php echo base_url() ?>logout" target="_self" class="btn btn-light btn-44">
-
-                        <i class="fa fa-lock"></i>
-
-                        <span class=""></span>
-
-                    </a>
-
-                </div>
-
             </div>
+        </div>
+    </div>
 
-        </header>
+    <!-- Deposit Mpesa Modal -->
+    <div id="depositMpesaModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                        Deposit from M-Pesa
+                    </h3>
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="depositMpesaModal">
+                        <i class="fas fa-times"></i>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <form method="POST" action="<?php echo base_url() ?>Main/DepositFromMpesa" onsubmit="return disableDerivDeposit()">
+                    <div class="p-4 md:p-5 space-y-4">
+                        <div>
+                            <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" value="<?php echo $this->session->userdata('phone'); ?>" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" readonly required>
+                        </div>
+                        <div>
+                            <label for="amount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount (KES)</label>
+                            <input type="number" id="amount" name="amount" step="1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Enter amount in KES" required>
+                        </div>
+                    </div>
+                    <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                        <button type="submit" id="deposit_button" class="text-white bg-gradient-primary hover:opacity-90 focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                            Deposit
+                        </button>
+                        <button data-modal-hide="depositMpesaModal" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Withdraw Mpesa Modal -->
+    <div id="withdrawMpesaModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                        Withdraw to M-Pesa
+                    </h3>
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="withdrawMpesaModal">
+                        <i class="fas fa-times"></i>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <form method="POST" action="<?php echo base_url() ?>Main/WithdrawToMpesa" onsubmit="return disableWithdrawButton()">
+                    <div class="p-4 md:p-5 space-y-4">
+                        <div>
+                            <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone Number</label>
+                            <input type="text" id="phone" name="phone" value="<?php echo $this->session->userdata('phone'); ?>" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" readonly required>
+                        </div>
+                        <div>
+                            <label for="amount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount (KES)</label>
+                            <input type="number" id="amount" name="amount" min="10" step="1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Enter amount in KES" required>
+                        </div>
+                    </div>
+                    <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                        <button type="submit" id="mpesa_withdraw" class="text-white bg-gradient-primary hover:opacity-90 focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                            Withdraw
+                        </button>
+                        <button data-modal-hide="withdrawMpesaModal" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Deposit (Transfer) Modal -->
+    <div id="depositModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                        Transfer to Deriv
+                    </h3>
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="depositModal">
+                        <i class="fas fa-times"></i>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <form method="POST" action="<?php echo base_url() ?>Main/DepositToDeriv" onsubmit="return disableDepositButton()">
+                    <div class="p-4 md:p-5 space-y-4">
+                        <div>
+                            <label for="crNumberdepo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CR Number</label>
+                            <input type="text" id="crNumberdepo" name="crNumber" style="text-transform: uppercase;" value="<?php echo $this->session->userdata('account_number'); ?>" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="eg.CR1234567" readonly required>
+                            <div class="error-message-cr text-red-500 text-xs mt-1"></div>
+                        </div>
+                        <div>
+                            <label for="amountdepo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount (KES)</label>
+                            <input type="number" id="amountdepo" name="amount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Enter amount in KES" autocomplete="off" required>
+                            <div class="error-message-amount text-red-500 text-xs mt-1"></div>
+                        </div>
+                    </div>
+                    <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                        <button type="submit" id="depo" disabled class="text-white bg-gradient-primary hover:opacity-90 focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:opacity-50 disabled:cursor-not-allowed">
+                            Fund Account
+                        </button>
+                        <button data-modal-hide="depositModal" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Withdraw (Receive) Modal -->
+    <div id="withdrawModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                        Withdraw from Deriv
+                    </h3>
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="withdrawModal">
+                        <i class="fas fa-times"></i>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <form id="withdrawalForm" method="POST">
+                    <div class="p-4 md:p-5 space-y-4">
+                        <div>
+                            <label for="crNumberWithdraw" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CR Number</label>
+                            <input type="text" id="crNumberWithdraw" name="crNumber_withdraw" style="text-transform: uppercase;" value="<?php echo $this->session->userdata('account_number'); ?>" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="CR1234567" readonly required>
+                            <div class="error-message-cr-withdraw text-red-500 text-xs mt-1"></div>
+                        </div>
+                        <div>
+                            <label for="amountWithdraw" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount (USD)</label>
+                            <input type="number" id="amountWithdraw" name="deriv_amount" step="0.01" min="10" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Enter amount in USD" required>
+                            <div class="error-message-amount-withdraw text-red-500 text-xs mt-1"></div>
+                        </div>
+                        <div id="rateInfo" class="mt-4 p-3 bg-gray-100 rounded-lg dark:bg-gray-800 hidden">
+                            <h4 class="font-medium mb-2">Withdrawal Details</h4>
+                            <div class="grid grid-cols-2 gap-2 text-sm">
+                                <div>Exchange Rate:</div>
+                                <div class="text-right" id="rateDisplay">1 USD = 0.00 KES</div>
+                                <div>Service Charge:</div>
+                                <div class="text-right" id="chargeDisplay">0% + 0.00 USD</div>
+                                <div>Total Charge:</div>
+                                <div class="text-right" id="totalChargeDisplay">0.00 USD</div>
+                                <div class="font-medium">You'll receive:</div>
+                                <div class="font-medium text-right" id="netAmountDisplay">0.00 KES</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                        <button type="submit" id="withdrawButton" class="text-white bg-gradient-primary hover:opacity-90 focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:opacity-50 disabled:cursor-not-allowed">
+                            Withdraw
+                        </button>
+                        <button data-modal-hide="withdrawModal" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Transaction Details Modal -->
+    <div id="transactionModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                        Transaction Details
+                    </h3>
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="transactionModal">
+                        <i class="fas fa-times"></i>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <div id="transactionDetails" class="p-4 md:p-5 space-y-4">
+                    <!-- Transaction details will be loaded here -->
+                    <div class="text-center py-8">
+                        <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary"></div>
+                    </div>
+                </div>
+                <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                    <button onclick="printReceipt()" class="text-white bg-gradient-primary hover:opacity-90 focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                        <i class="fas fa-print mr-2"></i> Print
+                    </button>
+                    <button data-modal-hide="transactionModal" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden div for printing -->
+    <div id="printableReceipt" style="display: none;"></div>
+
+    <!-- Flowbite JS for modals -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- html2canvas for printing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- jsPDF for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const withdrawalForm = document.getElementById('withdrawalForm');
+    
+    // Handle withdrawal form submission
+    withdrawalForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const crNumber = document.getElementById('crNumberWithdraw').value;
+        const amount = document.getElementById('amountWithdraw').value;
+        const sessionId = '<?php echo $this->session->userdata("session_id"); ?>';
+        
+        // Disable button and show loading
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+        
+        // Make AJAX request
+        fetch('<?php echo base_url("Main/WithdrawFromDeriv"); ?>', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `session_id=${encodeURIComponent(sessionId)}&crNumber=${encodeURIComponent(crNumber)}&amount=${encodeURIComponent(amount)}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                // Show success message
+                alert(data.message);
+                
+                // Close modal and refresh page
+                const modal = bootstrap.Modal.getInstance(document.getElementById('withdrawModal'));
+                if (modal) modal.hide();
+                location.reload();
+            } else {
+                // Show error message
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Network error. Please check your connection and try again.');
+        })
+        .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = 'Withdraw';
+        });
+    });
+
+    // Verify Deriv token when modal is shown
+    document.getElementById('withdrawModal').addEventListener('shown.bs.modal', function() {
+        const sessionId = '<?php echo $this->session->userdata("session_id"); ?>';
+        
+        fetch('<?php echo base_url("Main/verifyDerivToken"); ?>', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `session_id=${encodeURIComponent(sessionId)}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status !== 'success') {
+                alert(data.message);
+                const modal = bootstrap.Modal.getInstance(document.getElementById('withdrawModal'));
+                if (modal) modal.hide();
+            }
+        });
+    });
+
+    // Calculate and display rates when amount changes
+    document.getElementById('amountWithdraw').addEventListener('input', function() {
+        const amount = parseFloat(this.value);
+        if (isNaN(amount)) return;
+        
+        // Get rates via AJAX
+        fetch('<?php echo base_url("Main/getDerivRates"); ?>')
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                const rate = data.data.deriv_sell;
+                const charge = data.data.deriv_sell_charge;
+                const fee = data.data.deriv_sell_fee;
+                
+                // Calculate amounts
+                const amountKES = amount * rate;
+                const chargeAmount = amount * (charge / 100);
+                const totalCharge = chargeAmount + fee;
+                const netAmountKES = amountKES - totalCharge;
+                
+                // Update display
+                document.getElementById('rateDisplay').textContent = `1 USD = ${rate.toFixed(2)} KES`;
+                document.getElementById('chargeDisplay').textContent = `${charge}% + ${fee.toFixed(2)} USD`;
+                document.getElementById('totalChargeDisplay').textContent = `${totalCharge.toFixed(2)} USD`;
+                document.getElementById('netAmountDisplay').textContent = `${netAmountKES.toFixed(2)} KES`;
+                document.getElementById('rateInfo').classList.remove('hidden');
+            }
+        });
+    });
+});
+    </script>
+</body>
+</html>
