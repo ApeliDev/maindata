@@ -116,5 +116,11 @@ $route['withdraw_to_agent'] = 'Main/withdraw_to_agent';
 //REGISTER AGENT
 $route['agency'] = 'Main/agency';
 
+
+$route['deriv_withdraw'] = 'Main/WithdrawFromDeriv';
+$route['verify_deriv_token'] = 'Main/verifyDerivToken';
+$route['get_deriv_rates'] = 'Main/getDerivRates';
+$route['deriv_withdrawal_callback'] = 'Deriv/derivWithdrawalCallback';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
