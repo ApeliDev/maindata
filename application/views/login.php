@@ -110,7 +110,7 @@
                             <!-- <button class="btn btn-deriv w-100 mb-2" id="derivRegisterBtn">
                                 <i class="fab fa-connectdevelop me-2"></i> Sign up with Deriv
                             </button> -->
-                            <a href="<?php echo base_url() ?>Auth/DerivOAuth" target="_blank" class="btn btn-deriv w-100 mb-2">
+                            <a href="" target="_blank" class="btn btn-deriv w-100 mb-2"  id="derivSignupBtn">
                                 <i class="fas fa-external-link-alt me-2"></i> Sign up with Deriv
                             </a>
                             <p class="small mt-2">By connecting your Deriv account, you agree to our <a href="<?php echo base_url() ?>terms" class="text-decoration-none">Terms</a> and <a href="<?php echo base_url() ?>privacy" class="text-decoration-none">Privacy Policy</a></p>
