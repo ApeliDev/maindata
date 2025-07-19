@@ -103,18 +103,18 @@
                         </form>
 
                         <!-- Deriv Login Option -->
-                        <div class="divider">
+                        <!-- <div class="divider">
                             <span class="divider-text">OR</span>
-                        </div>
-                        <div class="deriv-login-container">
-                            <!-- <button class="btn btn-deriv w-100 mb-2" id="derivRegisterBtn">
+                        </div> -->
+                        <!-- <div class="deriv-login-container">
+                             <button class="btn btn-deriv w-100 mb-2" id="derivRegisterBtn">
                                 <i class="fab fa-connectdevelop me-2"></i> Sign up with Deriv
-                            </button> -->
+                            </button>
                             <a href="https://track.deriv.com/_ell6COpUOp5MjdsyM5hasGNd7ZgqdRLk/1/" target="_blank" class="btn btn-deriv w-100 mb-2">
                                 <i class="fas fa-external-link-alt me-2"></i> Sign up with Deriv
                             </a>
                             <p class="small mt-2">By connecting your Deriv account, you agree to our <a href="<?php echo base_url() ?>terms" class="text-decoration-none">Terms</a> and <a href="<?php echo base_url() ?>privacy" class="text-decoration-none">Privacy Policy</a></p>
-                        </div>
+                        </div> -->
                     </div>
                     
                     <div class="auth-footer">
