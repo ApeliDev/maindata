@@ -361,6 +361,8 @@ if(!empty($checkout_token))
                 </button>
             </div>
 
+            
+
             <!-- Recent Transactions -->
             <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden">
                 <div class="p-4 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center">
@@ -538,7 +540,7 @@ if(!empty($checkout_token))
     </div>
 
     <!-- Deposit (Transfer) Modal -->
-    <div id="depositModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <!-- <div id="depositModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-md max-h-full">
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
@@ -574,7 +576,47 @@ if(!empty($checkout_token))
                 </form>
             </div>
         </div>
+    </div> -->
+
+    <div id="depositModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-md max-h-full">
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                    Transfer to Deriv
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="depositModal">
+                    <i class="fas fa-times"></i>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            
+            <!-- Maintenance Message -->
+            <div class="p-6 md:p-8 text-center space-y-4">
+                <div class="flex justify-center mb-4">
+                    <div class="w-16 h-16 bg-yellow-100 dark:bg-yellow-900 rounded-full flex items-center justify-center">
+                        <i class="fas fa-wrench text-2xl text-yellow-600 dark:text-yellow-400"></i>
+                    </div>
+                </div>
+                <h4 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                    System Maintenance
+                </h4>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">
+                    We're currently updating our Deriv transfer system to serve you better.
+                </p>
+                <p class="text-gray-600 dark:text-gray-300 font-medium">
+                    Please check back later.
+                </p>
+            </div>
+            
+            <div class="flex items-center justify-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                <button data-modal-hide="depositModal" type="button" class="text-white bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg text-sm font-medium px-6 py-2.5 focus:z-10 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700">
+                    OK
+                </button>
+            </div>
+        </div>
     </div>
+</div>
 
     <!-- Withdraw (Receive) Modal -->
     <div id="withdrawModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
