@@ -53,7 +53,7 @@
             <div class="auth-form-container">
                 <div class="auth-container">
                     <div class="auth-logo">
-                        <img src="<?php echo base_url() ?>assets/img/stepaksh-money-on-the-go.png" alt="STEPAKASH Logo" />
+                        <img src="<?php echo base_url() ?>assets/img/stepakash-money-on-the-go.png" alt="STEPAKASH Logo" />
                     </div>
                     
                     <div class="form-tab-switcher">
