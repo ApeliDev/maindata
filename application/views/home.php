@@ -158,7 +158,7 @@ if(!empty($checkout_token))
             </div>
             
             <div class="flex-1 flex justify-center">
-                <img src="<?php echo base_url() ?>assets/img/stepakash-home1.png" alt="Stepakash" class="h-8">
+                <img src="<?php echo base_url() ?>assets/img/home-header-stepakash.png" alt="Stepakash" class="h-8">
             </div>
             
             <div class="flex items-center space-x-3">

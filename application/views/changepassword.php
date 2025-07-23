@@ -39,9 +39,9 @@ if(!empty($checkout_token))
     <link rel="manifest" href="<?php echo base_url() ?>manifest.json" />
 
     <!-- Favicons -->
-    <link rel="apple-touch-icon" href="<?php echo base_url() ?>assets/img/stepak_180.png" sizes="180x180">
-    <link rel="icon" href="<?php echo base_url() ?>assets/img/stepak_32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="<?php echo base_url() ?>assets/img/stepak_16.png" sizes="16x16" type="image/png">
+    <link rel="apple-touch-icon" href="<?php echo base_url() ?>assets/img/stepaksh-darkgreen.png" sizes="180x180">
+    <link rel="icon" href="<?php echo base_url() ?>assets/img/stepaksh-darkgreen.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="<?php echo base_url() ?>assets/img/stepaksh-darkgreen.png" sizes="16x16" type="image/png">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -386,7 +386,7 @@ if(!empty($checkout_token))
             <i class="fas fa-arrow-left"></i>
         </button>
         
-        <img src="<?php echo base_url() ?>assets/img/stepak.png" class="header-logo" alt="STEPAKASH">
+        <img src="<?php echo base_url() ?>assets/img/home-header-stepakash.png" class="header-logo" alt="STEPAKASH">
         
         <div class="header-actions">
             <button class="theme-toggle header-btn">

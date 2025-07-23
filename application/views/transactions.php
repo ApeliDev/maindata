@@ -26,9 +26,9 @@ if(!empty($checkout_token)) {
     <link rel="manifest" href="<?php echo base_url() ?>manifest.json" />
 
     <!-- Favicons -->
-    <link rel="apple-touch-icon" href="<?php echo base_url() ?>assets/img/stepak_180.png" sizes="180x180">
-    <link rel="icon" href="<?php echo base_url() ?>assets/img/stepak_32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="<?php echo base_url() ?>assets/img/stepak_16.png" sizes="16x16" type="image/png">
+    <link rel="apple-touch-icon" href="<?php echo base_url() ?>assets/img/stepaksh-darkgreen.png" sizes="180x180">
+    <link rel="icon" href="<?php echo base_url() ?>assets/img/stepaksh-darkgreen.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="<?php echo base_url() ?>assets/img/stepaksh-darkgreen.png" sizes="16x16" type="image/png">
 
     <!-- Google fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
@@ -145,7 +145,7 @@ if(!empty($checkout_token)) {
             </div>
             
             <div class="flex-1 flex justify-center">
-                <img src="<?php echo base_url() ?>assets/img/stepakash-home1.png" alt="Stepakash" class="h-8">
+                <img src="<?php echo base_url() ?>assets/img/home-header-stepakash.png" alt="Stepakash" class="h-8">
             </div>
             
             <div class="flex items-center space-x-3">
