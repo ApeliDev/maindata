@@ -3,26 +3,111 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="STEPAKASH - Modern Money Transaction Platform">
-    <meta name="author" content="">
-    <title>StepaKash - Connect Deriv Account</title>
-    <!-- manifest meta -->
+    <meta name="description" content="Connect your Deriv account to StepaKash for instant M-PESA transfers. Secure, fast, and reliable money transfers in Kenya. Low fees, 24/7 support.">
+    <meta name="keywords" content="StepaKash, Deriv account, M-PESA transfer, connect Deriv, money transfer Kenya, Deriv to M-PESA, instant transfers, secure payments, fintech Kenya">
+    <meta name="author" content="StepaKash">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://stepakash.com/derivauth">
+    
+    <title>Connect Your Deriv Account | StepaKash - Money On The Go...</title>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://stepakash.com/derivauth">
+    <meta property="og:title" content="Connect Your Deriv Account | StepaKash - Instant M-PESA Transfers">
+    <meta property="og:description" content="Connect your Deriv account to StepaKash for instant M-PESA transfers. Secure, fast, and reliable money transfers in Kenya.">
+    <meta property="og:image" content="https://stepakash.com/assets/img/stepakash-money-on-the-go.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="StepaKash">
+    <meta property="og:locale" content="en_KE">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://stepakash.com/derivauth">
+    <meta property="twitter:title" content="Connect Your Deriv Account | StepaKash - Instant M-PESA Transfers">
+    <meta property="twitter:description" content="Connect your Deriv account to StepaKash for instant M-PESA transfers. Secure, fast, and reliable money transfers in Kenya.">
+    <meta property="twitter:image" content="https://stepakash.com/assets/img/stepakash-money-on-the-go.png">
+    <meta name="twitter:creator" content="@stepakash">
+    <meta name="twitter:site" content="@stepakash">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="language" content="English">
+    <meta name="geo.region" content="KE">
+    <meta name="geo.country" content="Kenya">
+    <meta name="geo.placename" content="Nairobi">
+    <meta name="theme-color" content="#007bff">
+    <meta name="msapplication-TileColor" content="#007bff">
+    <meta name="application-name" content="StepaKash">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Connect Your Deriv Account",
+        "description": "Connect your Deriv account to StepaKash for instant M-PESA transfers in Kenya",
+        "url": "https://stepakash.com/derivauth",
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "StepaKash",
+            "url": "https://stepakash.com"
+        },
+        "provider": {
+            "@type": "FinancialService",
+            "name": "StepaKash",
+            "description": "Fast and secure Deriv to M-PESA money transfer service in Kenya",
+            "url": "https://stepakash.com",
+            "logo": "https://stepakash.com/assets/img/stepakash-money-on-the-go.png",
+            "telephone": "+254-741-554994",
+            "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "KE",
+                "addressRegion": "Nairobi County",
+                "addressLocality": "Nairobi"
+            },
+            "serviceType": "Money Transfer Service",
+            "areaServed": {
+                "@type": "Country",
+                "name": "Kenya"
+            },
+            "currenciesAccepted": "KES, USD",
+            "paymentAccepted": "M-PESA, Deriv"
+        }
+    }
+    </script>
+    
+    <!-- PWA Meta -->
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="manifest" href="<?php echo base_url() ?>manifest.json" />
+    <link rel="manifest" href="./manifest.json" />
+    
     <!-- Favicons -->
-    <link rel="apple-touch-icon" href="<?php echo base_url() ?>assets/img/stepakash-money-on-the-go.png" sizes="180x180">
-    <link rel="icon" href="<?php echo base_url() ?>assets/img/stepakash-money-on-the-go.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="<?php echo base_url() ?>assets/img/stepakash-money-on-the-go.png" sizes="16x16" type="image/png">
-    <!-- Google fonts-->
+    <link rel="apple-touch-icon" href="./assets/img/stepakash-money-on-the-go.png" sizes="180x180">
+    <link rel="icon" href="./assets/img/stepakash-money-on-the-go.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="./assets/img/stepakash-money-on-the-go.png" sizes="16x16" type="image/png">
+    
+    <!-- Preconnect for Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Bootstrap core CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles -->
-    <link href="<?php echo base_url() ?>assets/css/login.css" rel="stylesheet">
-    <link href="<?php echo base_url() ?>assets/css/login2.css" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    
+    <!-- Custom Styles -->
+    <link href="./assets/css/login.css" rel="stylesheet">
+    <link href="./assets/css/login2.css" rel="stylesheet">
 </head>
 <body class="h-100">
     <div class="auth-wrapper">
@@ -61,9 +146,13 @@
                         <p class="auth-subtitle mb-4">First step to create your StepaKash account</p>
                         
                         <div class="deriv-login-container">
-                            <button class="btn btn-deriv w-100" id="derivSignupBtn">
+                           <button
+                                id="derivSignupBtn"
+                                class="w-full bg-[#0f753a] hover:bg-[#2c8a53] text-white font-semibold py-2 px-4 rounded flex items-center justify-center transition-colors duration-200"
+                                 >
                                 <i class="fab fa-connectdevelop me-2"></i> Authorize Deriv
                             </button>
+
                             <p class="small mt-3">
                                 By connecting, you authorize StepaKash to access your Deriv account information 
                                 for transaction purposes.
