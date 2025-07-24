@@ -10,9 +10,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="manifest" href="<?php echo base_url() ?>manifest.json" />
     <!-- Favicons -->
-    <link rel="apple-touch-icon" href="<?php echo base_url() ?>assets/img/stepak_180.png" sizes="180x180">
-    <link rel="icon" href="<?php echo base_url() ?>assets/img/stepak_32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="<?php echo base_url() ?>assets/img/stepak_16.png" sizes="16x16" type="image/png">
+    <link rel="apple-touch-icon" href="<?php echo base_url() ?>assets/img/stepakash-money-on-the-go.png" sizes="180x180">
+    <link rel="icon" href="<?php echo base_url() ?>assets/img/stepakash-money-on-the-go.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="<?php echo base_url() ?>assets/img/stepakash-money-on-the-go.png" sizes="16x16" type="image/png">
     <!-- Google fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">

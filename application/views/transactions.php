@@ -26,9 +26,9 @@ if(!empty($checkout_token)) {
     <link rel="manifest" href="<?php echo base_url() ?>manifest.json" />
 
     <!-- Favicons -->
-    <link rel="apple-touch-icon" href="<?php echo base_url() ?>assets/img/stepaksh-darkgreen.png" sizes="180x180">
-    <link rel="icon" href="<?php echo base_url() ?>assets/img/stepaksh-darkgreen.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="<?php echo base_url() ?>assets/img/stepaksh-darkgreen.png" sizes="16x16" type="image/png">
+    <link rel="apple-touch-icon" href="<?php echo base_url() ?>assets/img/stepaksh-money-on-the-go.png" sizes="180x180">
+    <link rel="icon" href="<?php echo base_url() ?>assets/img/stepaksh-money-on-the-go.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="<?php echo base_url() ?>assets/img/stepaksh-money-on-the-go.png" sizes="16x16" type="image/png">
 
     <!-- Google fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
@@ -46,24 +46,24 @@ if(!empty($checkout_token)) {
                 extend: {
                     colors: {
                         primary: {
-                            DEFAULT: '#059669', 
-                            dark: '#10b981',   
+                            DEFAULT: '#0f753a',  // Updated deep green
+                            dark: '#3e9965',     // Lighter variant from image
                         },
                         secondary: {
-                            DEFAULT: '#065f46', // Emerald-700
-                            dark: '#047857',    // Emerald-600
+                            DEFAULT: '#2c8a53',  // Slightly lighter complementary green
+                            dark: '#5aab7d',     // Even lighter green (optional)
                         },
                         accent: {
-                            DEFAULT: '#b59a3e', // Custom gold
-                            dark: '#d4af37',    // Rich gold
+                            DEFAULT: '#efd050',  // Updated yellow/gold
+                            dark: '#f4dc74',     // Lighter variant for hover
                         },
                         dark: {
-                            DEFAULT: '#1e293b', // Slate-800
-                            light: '#334155',   // Slate-700
+                            DEFAULT: '#1e293b',  // Slate-800
+                            light: '#334155',    // Slate-700
                         },
                         light: {
-                            DEFAULT: '#f8fafc', // Slate-50
-                            dark: '#e2e8f0',    // Slate-200
+                            DEFAULT: '#f8fafc',  // Slate-50
+                            dark: '#e2e8f0',     // Slate-200
                         }
                     },
                     fontFamily: {
@@ -72,7 +72,7 @@ if(!empty($checkout_token)) {
                     boxShadow: {
                         'soft': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.02)',
                         'hard': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-                        'glow': '0 0 10px 2px rgba(181, 154, 62, 0.3)',
+                        'glow': '0 0 10px 2px rgba(239, 208, 80, 0.3)', // Adjusted glow color to match new accent
                     },
                     animation: {
                         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
@@ -94,6 +94,7 @@ if(!empty($checkout_token)) {
             }
         }
     </script>
+
     <style type="text/tailwindcss">
         @layer utilities {
             .text-shadow {
