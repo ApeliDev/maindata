@@ -212,10 +212,9 @@
                             <span class="divider-text">OR</span>
                         </div>
                         <div class="deriv-login-container">
-                            <button class="btn btn-deriv w-100 mb-2" style="background-color: #7e22ce; color: white;" id="derivSignupBtn">
-    <i class="fab fa-connectdevelop me-2"></i> Sign up with Deriv
-</button>
-
+                            <button class="btn btn-secondary w-100 mb-2" id="derivSignupBtn">
+                                <i class="fab fa-connectdevelop me-2"></i> Sign up with Deriv
+                            </button> 
                             <!-- <a href="" target="_blank" class="btn btn-deriv w-100 mb-2"  id="derivSignupBtn">
                                 <i class="fas fa-external-link-alt me-2"></i> Sign up with Deriv
                             </a> -->
