@@ -212,12 +212,12 @@
                             <span class="divider-text">OR</span>
                         </div>
                         <div class="deriv-login-container">
-                            <!-- <button class="btn btn-deriv w-100 mb-2" id="derivRegisterBtn">
+                            <button class="btn btn-primary w-100 mb-2" id="derivSignupBtn">
                                 <i class="fab fa-connectdevelop me-2"></i> Sign up with Deriv
-                            </button> -->
-                            <a href="" target="_blank" class="btn btn-deriv w-100 mb-2"  id="derivSignupBtn">
+                            </button> 
+                            <!-- <a href="" target="_blank" class="btn btn-deriv w-100 mb-2"  id="derivSignupBtn">
                                 <i class="fas fa-external-link-alt me-2"></i> Sign up with Deriv
-                            </a>
+                            </a> -->
                             <p class="small mt-2">By connecting your Deriv account, you agree to our <a href="<?php echo base_url() ?>terms" class="text-decoration-none">Terms</a> and <a href="<?php echo base_url() ?>privacy" class="text-decoration-none">Privacy Policy</a></p>
                         </div>
                     </div>
