@@ -47,9 +47,9 @@
                     ?>
 
                     <form action="<?php echo base_url() ?>Auth/ConfirmOtp" method="POST" id="otpForm">
-                        <div class="form-floating mb-4 error-container">
+                        <div class="mb-4 error-container">
+                            <label for="otp" class="form-label">Verification Code</label>
                             <input type="number" class="form-control" name="otp" id="otp" placeholder="123456" autocomplete="off" required>
-                            <label for="otp">Verification Code</label>
                             <div id="otpError" class="error-message"></div>
                         </div>
                         

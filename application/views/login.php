@@ -180,33 +180,33 @@
                     <!-- Login Form -->
                     <div class="form-panel active" id="loginForm">
                        <form action="<?php echo base_url() ?>Auth/Login" method="POST" id="loginFormSubmit">
-    <div class="mb-4 error-container">
-        <label for="loginPhone" class="form-label">Phone Number (e.g. 712345678)</label>
-        <input type="tel" name="phone" class="form-control" id="loginPhone" placeholder="Enter your phone number" autocomplete="off" required>
-        <div id="loginPhoneError" class="error-message"></div>
-    </div>
-    
-    <div class="mb-4 error-container">
-        <label for="loginpassword" class="form-label">Password</label>
-        <input type="password" class="form-control" name="password" id="loginpassword" placeholder="Enter your password" autocomplete="off" minlength="4" required>
-        <div id="loginPasswordError" class="error-message"></div>
-    </div>
-    
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="rememberMe">
-            <label class="form-check-label small" for="rememberMe">Remember me</label>
-        </div>
-        <a href="<?php echo base_url() ?>forgotpassword" class="small text-decoration-none">Forgot password?</a>
-    </div>
-    
-    <div class="d-grid gap-2">
-        <button type="submit" class="btn btn-primary" id="loginBtn">
-            <span class="spinner"></span>
-            <span class="btn-text">Login</span>
-        </button>
-    </div>
-</form>
+                            <div class="mb-4 error-container">
+                                <label for="loginPhone" class="form-label">Phone Number (e.g. 712345678)</label>
+                                <input type="tel" name="phone" class="form-control" id="loginPhone" placeholder="Enter your phone number" autocomplete="off" required>
+                                <div id="loginPhoneError" class="error-message"></div>
+                            </div>
+                            
+                            <div class="mb-4 error-container">
+                                <label for="loginpassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" name="password" id="loginpassword" placeholder="Enter your password" autocomplete="off" minlength="4" required>
+                                <div id="loginPasswordError" class="error-message"></div>
+                            </div>
+                            
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="rememberMe">
+                                    <label class="form-check-label small" for="rememberMe">Remember me</label>
+                                </div>
+                                <a href="<?php echo base_url() ?>forgotpassword" class="small text-decoration-none">Forgot password?</a>
+                            </div>
+                            
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary" id="loginBtn">
+                                    <span class="spinner"></span>
+                                    <span class="btn-text">Login</span>
+                                </button>
+                            </div>
+                        </form>
 
                         <!-- Deriv Login Option -->
                         <div class="divider">

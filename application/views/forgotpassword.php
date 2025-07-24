@@ -79,9 +79,9 @@
 
                     <!-- Forgot Password Form -->
                     <form action="<?php echo base_url() ?>Auth/sendotp" method="POST" id="forgotPasswordForm">
-                        <div class="form-floating mb-4 error-container">
+                        <div class="mb-4 error-container">
+                            <label for="phone" class="form-label">Phone Number (e.g. 712345678)</label>
                             <input type="tel" class="form-control" name="phone" id="phone" placeholder="712345678" autocomplete="off" required>
-                            <label for="phone">Phone Number (e.g. 712345678)</label>
                             <div id="phoneError" class="error-message"></div>
                         </div>
                         

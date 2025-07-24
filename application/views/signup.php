@@ -179,63 +179,61 @@
                     
                     <!-- Registration Form -->
                     <form action="<?php echo base_url().'Auth/CreateAccount' ?>" method="POST" id="registerFormSubmit">
-                        <input type="hidden" name="deriv_account" id="derivAccount" value="1">
-                        <input type="hidden" name="deriv_token" id="derivToken" value="<?php echo isset($deriv_data['deriv_token']) ? $deriv_data['deriv_token'] : '' ?>">
-                        <input type="hidden" name="deriv_email" id="derivEmail" value="<?php echo isset($deriv_data['deriv_email']) ? $deriv_data['deriv_email'] : '' ?>">
-                        <input type="hidden" name="account_number" id="account_number" value="<?php echo isset($deriv_data['deriv_account_number']) ? $deriv_data['deriv_account_number'] : '' ?>">
-                        <input type="hidden" name="deriv_login_id" id="derivLoginId" value="<?php echo isset($deriv_data['deriv_login_id']) ? $deriv_data['deriv_login_id'] : '' ?>">
-                        <input type="hidden" name="deriv_account_number" id="derivAccountNumber" value="<?php echo isset($deriv_data['deriv_account_number']) ? $deriv_data['deriv_account_number'] : '' ?>">
+                            <input type="hidden" name="deriv_account" id="derivAccount" value="1">
+                            <input type="hidden" name="deriv_token" id="derivToken" value="<?php echo isset($deriv_data['deriv_token']) ? $deriv_data['deriv_token'] : '' ?>">
+                            <input type="hidden" name="deriv_email" id="derivEmail" value="<?php echo isset($deriv_data['deriv_email']) ? $deriv_data['deriv_email'] : '' ?>">
+                            <input type="hidden" name="account_number" id="account_number" value="<?php echo isset($deriv_data['deriv_account_number']) ? $deriv_data['deriv_account_number'] : '' ?>">
+                            <input type="hidden" name="deriv_login_id" id="derivLoginId" value="<?php echo isset($deriv_data['deriv_login_id']) ? $deriv_data['deriv_login_id'] : '' ?>">
+                            <input type="hidden" name="deriv_account_number" id="derivAccountNumber" value="<?php echo isset($deriv_data['deriv_account_number']) ? $deriv_data['deriv_account_number'] : '' ?>">
 
-                
-            
-                        <div class="form-floating mb-4">
-                            <input type="text" class="form-control" name="fullname" id="fullname" 
-                                   placeholder="Full Name" required
-                                   value="<?php echo isset($deriv_data['fullname']) ? $deriv_data['fullname'] : '' ?>">
-                            <label for="fullname">Full Name</label>
-                        </div>
-                        
-                        <!--<div class="form-floating mb-4">
-                            <input type="email" class="form-control" name="email" id="email" 
-                                   placeholder="Email" required
-                                   value="<?php echo isset($deriv_data['deriv_email']) ? $deriv_data['deriv_email'] : '' ?>">
-                            <label for="email">Email Address</label>
-                        </div>-->
-                        
-                        <div class="form-floating mb-4 error-container">
-                            <input type="tel" class="form-control" name="phone" id="phone" placeholder="712345678" autocomplete="off" required>
-                            <label for="phone">Phone Number (e.g. 712345678)</label>
-                            <div id="phoneError" class="error-message"></div>
-                        </div>
-
-                        <div class="form-floating mb-4 error-container">
-                            <input type="password" class="form-control" name="password" id="password" placeholder="Password" autocomplete="off" minlength="4" required>
-                            <label for="password">Password</label>
-                            <div id="passwordError" class="error-message"></div>
-                        </div>
-
-                        <div class="form-floating mb-4 error-container">
-                            <input type="password" class="form-control" name="confirmpassword" id="confirmpassword" placeholder="Confirm Password" autocomplete="off" minlength="4" required>
-                            <label for="confirmpassword">Confirm Password</label>
-                            <div id="confirmPasswordError" class="error-message"></div>
-                        </div>
-
-                        <div class="mb-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="termsCheck" required>
-                                <label class="form-check-label small" for="termsCheck">
-                                    I agree to the <a href="terms" class="text-decoration-none">Terms and Conditions</a>
-                                </label>
+                            <div class="mb-4">
+                                <label for="fullname" class="form-label">Full Name</label>
+                                <input type="text" class="form-control" name="fullname" id="fullname" 
+                                    placeholder="Enter your full name" required
+                                    value="<?php echo isset($deriv_data['fullname']) ? $deriv_data['fullname'] : '' ?>">
                             </div>
-                        </div>
+                            
+                            <!--<div class="mb-4">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" name="email" id="email" 
+                                    placeholder="Enter your email address" required
+                                    value="<?php echo isset($deriv_data['deriv_email']) ? $deriv_data['deriv_email'] : '' ?>">
+                            </div>-->
+                            
+                            <div class="mb-4 error-container">
+                                <label for="phone" class="form-label">Phone Number (e.g. 712345678)</label>
+                                <input type="tel" class="form-control" name="phone" id="phone" placeholder="712345678" autocomplete="off" required>
+                                <div id="phoneError" class="error-message"></div>
+                            </div>
 
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary" id="registerBtn">
-                                <span class="spinner"></span>
-                                <span class="btn-text">Complete Registration</span>
-                            </button>
-                        </div>
-                    </form>
+                            <div class="mb-4 error-container">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password" autocomplete="off" minlength="4" required>
+                                <div id="passwordError" class="error-message"></div>
+                            </div>
+
+                            <div class="mb-4 error-container">
+                                <label for="confirmpassword" class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" name="confirmpassword" id="confirmpassword" placeholder="Confirm your password" autocomplete="off" minlength="4" required>
+                                <div id="confirmPasswordError" class="error-message"></div>
+                            </div>
+
+                            <div class="mb-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="termsCheck" required>
+                                    <label class="form-check-label small" for="termsCheck">
+                                        I agree to the <a href="terms" class="text-decoration-none">Terms and Conditions</a>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary" id="registerBtn">
+                                    <span class="spinner"></span>
+                                    <span class="btn-text">Complete Registration</span>
+                                </button>
+                            </div>
+                        </form>
                     
                     <div class="auth-footer">
                         © <?php echo date('Y'); ?> StepaKash. All rights reserved.
