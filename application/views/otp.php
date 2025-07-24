@@ -30,7 +30,7 @@
             <div class="col-12 col-lg-6">
                 <div class="auth-container mb-4">
                     <div class="auth-logo">
-                        <img src="<?php echo base_url() ?>assets/img/stepaksh-money-on-the-go.png" alt="STEPAKASH Logo" />
+                        <img src="<?php echo base_url() ?>assets/img/stepakash-money-on-the-go.png" alt="STEPAKASH Logo" />
                     </div>
                     <h2 class="auth-title">OTP Verification</h2>
                     <p class="auth-subtitle">Enter the verification code sent to your phone</p>
