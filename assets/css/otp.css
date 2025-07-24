@@ -1,17 +1,17 @@
 
-        :root {
-            --primary-color: #00a54f;       /* Safaricom green */
-            --secondary-color: #007f3d;     /* Darker green */
-            --accent-color: #d4af37;        /* Gold */
-            --accent-hover: #ba9a2f;        /* Darker gold */
-            --text-color: #333333;
-            --light-text: #666666;
-            --background: #e8e8e8;          /* Updated to match second file */
-            --card-bg: #ffffff;
-            --success: #00a54f;
-            --danger: #e74c3c;
-            --warning: #f39c12;
-        }
+:root {
+    --primary-color: #0f753a;       /* Updated green */
+    --secondary-color: #2c8a53;     /* Slightly lighter green */
+    --accent-color: #efd050;        /* Updated yellow/gold */
+    --accent-hover: #f4dc74;        /* Lighter shade for hover */
+    --text-color: #333333;
+    --light-text: #666666;
+    --background: #e8e8e8;          /* Keep or adjust as needed */
+    --card-bg: #ffffff;
+    --success: #0f753a;             /* Match updated primary green */
+    --danger: #e74c3c;
+    --warning: #f39c12;
+    }
 
         body {
             font-family: 'Inter', sans-serif;

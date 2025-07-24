@@ -1,18 +1,16 @@
   :root {
-            --primary-color: #00a54f;       /* Slightly brighter green */
-            --secondary-color: #006b33;     /* Deeper green for contrast */
-            --accent-color: #d4af37;        /* Rich gold */
-            --accent-hover: #e6c346;        /* Brighter gold for hover states */
-            --text-color: #223322;          /* Darker green-tinted text */
-            --light-text: #556655;          /* Green-tinted light text */
-            --background: #f5f8f5;          /* Subtle green-tinted background */
-            --card-bg: #ffffff;
-            --success: #00a54f;
-            --danger: #e74c3c;
-            --warning: #f39c12;
-            --deriv-blue: #123456;          /* Deriv brand color */
-        }
-
+    --primary-color: #0f753a;       /* Updated green */
+    --secondary-color: #2c8a53;     /* Slightly lighter green */
+    --accent-color: #efd050;        /* Updated yellow/gold */
+    --accent-hover: #f4dc74;        /* Lighter shade for hover */
+    --text-color: #333333;
+    --light-text: #666666;
+    --background: #e8e8e8;          /* Keep or adjust as needed */
+    --card-bg: #ffffff;
+    --success: #0f753a;             /* Match updated primary green */
+    --danger: #e74c3c;
+    --warning: #f39c12;
+    }
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--background);
