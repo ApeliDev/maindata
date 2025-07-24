@@ -146,13 +146,9 @@
                         <p class="auth-subtitle mb-4">First step to create your StepaKash account</p>
                         
                         <div class="deriv-login-container">
-                           <button
-                                id="derivSignupBtn"
-                                class="w-full bg-[#0f753a] hover:bg-[#2c8a53] text-white font-semibold py-2 px-4 rounded flex items-center justify-center transition-colors duration-200"
-                                 >
+                            <button class="btn btn-deriv w-100" id="derivSignupBtn">
                                 <i class="fab fa-connectdevelop me-2"></i> Authorize Deriv
                             </button>
-
                             <p class="small mt-3">
                                 By connecting, you authorize StepaKash to access your Deriv account information 
                                 for transaction purposes.
