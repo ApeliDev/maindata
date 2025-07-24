@@ -18,7 +18,7 @@
     <meta property="og:url" content="https://stepakash.com">
     <meta property="og:title" content="StepaKash - Fast & Secure Deriv M-PESA Money Transfers">
     <meta property="og:description" content="Send money instantly with StepaKash! Secure Deriv to M-PESA transfers in Kenya. Low fees, instant processing, 24/7 support.">
-    <meta property="og:image" content="https://stepakash.com/assets/img/stepaksh-money-on-the-go.png">
+    <meta property="og:image" content="https://stepakash.com/assets/img/stepakash-money-on-the-go.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:site_name" content="StepaKash">
@@ -29,7 +29,7 @@
     <meta property="twitter:url" content="https://stepakash.com">
     <meta property="twitter:title" content="StepaKash - Fast & Secure Deriv M-PESA Money Transfers">
     <meta property="twitter:description" content="Send money instantly with StepaKash! Secure Deriv to M-PESA transfers in Kenya. Low fees, instant processing, 24/7 support.">
-    <meta property="twitter:image" content="https://stepakash.com/assets/img/stepaksh-money-on-the-go.png">
+    <meta property="twitter:image" content="https://stepakash.com/assets/img/stepakash-money-on-the-go.png">
     <meta name="twitter:creator" content="@stepakash">
     <meta name="twitter:site" content="@stepakash">
     
@@ -50,8 +50,8 @@
         "name": "StepaKash",
         "description": "Fast and secure Deriv to M-PESA money transfer service in Kenya",
         "url": "https://stepakash.com",
-        "logo": "https://stepakash.com/assets/img/stepaksh-money-on-the-go.png",
-        "image": "https://stepakash.com/assets/img/stepaksh-money-on-the-go.png",
+        "logo": "https://stepakash.com/assets/img/stepakash-money-on-the-go.png",
+        "image": "https://stepakash.com/assets/img/stepakash-money-on-the-go.png",
         "telephone": "+254-741-554994",
         "address": {
             "@type": "PostalAddress",
