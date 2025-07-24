@@ -101,10 +101,10 @@
     <link rel="manifest" href="./manifest.json" />
     
     <!-- Favicons -->
-    <link rel="apple-touch-icon" href="./assets/img/stepaksh-money-on-the-go.png" sizes="180x180">
-    <link rel="icon" href="./assets/img/stepaksh-money-on-the-go.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="./assets/img/stepaksh-money-on-the-go.png" sizes="16x16" type="image/png">
-    <link rel="shortcut icon" href="./assets/img/stepaksh-money-on-the-go.png">
+    <link rel="apple-touch-icon" href="./assets/img/stepakash-money-on-the-go.png" sizes="180x180">
+    <link rel="icon" href="./assets/img/stepakash-money-on-the-go.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="./assets/img/stepakash-money-on-the-go.png" sizes="16x16" type="image/png">
+    <link rel="shortcut icon" href="./assets/img/stepakash-money-on-the-go.png">
     
     <!-- Preconnect for Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
