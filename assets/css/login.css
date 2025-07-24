@@ -501,6 +501,16 @@ a:hover:after {
     }
 }
 
+.btn-deriv {
+    background-color: #7e22ce; /* Custom purple */
+    color: #fff;
+}
+
+.btn-deriv:hover,
+.btn-deriv:focus {
+    background-color: #6b21a8; /* Slightly darker purple */
+    color: #fff;
+}
 
 
 
