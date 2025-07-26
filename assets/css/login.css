@@ -1,16 +1,16 @@
 :root {
-    --primary-color: #0f753a;       /* Updated green */
+    --primary-color: #0f753a;       /* green */
     --secondary-color: #2c8a53;     /* Slightly lighter green */
-    --accent-color: #efd050;        /* Updated yellow/gold */
+    --accent-color: #efd050;        /* yellow/gold */
     --accent-hover: #f4dc74;        /* Lighter shade for hover */
     --text-color: #333333;
     --light-text: #666666;
-    --background: #e8e8e8;          /* Keep or adjust as needed */
+    --background: #e8e8e8;          
     --card-bg: #ffffff;
-    --success: #0f753a;             /* Match updated primary green */
+    --success: #0f753a;         
     --danger: #e74c3c;
     --warning: #f39c12;
-    }
+}
 
 body {
     font-family: 'Inter', sans-serif;
