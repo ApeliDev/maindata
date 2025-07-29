@@ -101,6 +101,13 @@ h2::after {
     background: var(--secondary-color);
 }
 
+h3 {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 20px 0 15px 0;
+}
+
 .acknowledgment {
     background: linear-gradient(135deg, rgba(15, 117, 58, 0.05), rgba(15, 117, 58, 0.02));
     border: 2px solid var(--accent-color);
@@ -152,6 +159,55 @@ h2::after {
     color: var(--accent-color);
     font-weight: bold;
     font-size: 1.1rem;
+}
+
+.privacy-section {
+    margin: 20px 0;
+}
+
+.privacy-section ul {
+    margin: 15px 0;
+    padding-left: 30px;
+}
+
+.privacy-section li {
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+.highlight-box {
+    background: linear-gradient(135deg, rgba(15, 117, 58, 0.05), rgba(15, 117, 58, 0.02));
+    border: 2px solid var(--accent-color);
+    border-radius: 15px;
+    padding: 25px;
+    margin: 25px 0;
+    box-shadow: 0 8px 20px rgba(239, 208, 80, 0.1);
+}
+
+.highlight-box h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.intro-section {
+    margin: 20px 0;
+}
+
+.intro-section p {
+    margin: 15px 0;
+    line-height: 1.7;
+}
+
+.contact-section {
+    background: linear-gradient(135deg, rgba(239, 208, 80, 0.1), rgba(244, 220, 116, 0.05));
+    border: 2px solid var(--accent-color);
+    border-radius: 15px;
+    padding: 30px;
+    margin: 30px 0;
+}
+
+.contact-section h2 {
+    margin-top: 0;
 }
 
 ol {
@@ -294,106 +350,108 @@ ol li::before {
         
         <div class="content">
             <div class="last-updated">
-                <strong>Last Updated:</strong> <?php echo date('F j, Y \a\t g:i A'); ?>
+                <strong>Last Updated:</strong> August 8, 2025
             </div>
 
             <div class="intro-section">
-                <p><strong>Effective Date:</strong> <?php echo date('F j, Y'); ?></p>
-                <p>At STEPAKASH, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our electronic money services.</p>
+                <p><strong>Effective Date:</strong> August 8, 2025</p>
+                <p>At <strong>StepaKash</strong>, your privacy is our priority. This Privacy Policy outlines how we collect, use, share, and safeguard your personal data when you engage with our digital financial services.</p>
             </div>
 
             <h2>Information We Collect</h2>
             <div class="privacy-section">
+                <p>We collect certain personal data to provide secure, reliable, and seamless service. This includes:</p>
                 <h3>Personal Information</h3>
-                <p>We collect the following types of personal information:</p>
                 <ul>
-                    <li>Full name</li>
-                    <li>Contact information (phone number)</li>
-                    <li>Financial information (Deriv Account Information)</li>
-                    <li>Device information and IP addresses</li>
+                    <li>Full Name</li>
+                    <li>Phone Number</li>
+                    <li>Financial Details (e.g., Deriv Account Information)</li>
+                    <li>Device Information and IP Address</li>
                 </ul>
             </div>
 
             <h2>How We Use Your Information</h2>
             <div class="privacy-section">
-                <h3>Primary Uses</h3>
-                <p>Your information is used to:</p>
+                <p>Your information enables us to:</p>
                 <ul>
-                    <li>Provide and maintain our electronic money services</li>
-                    <li>Process transactions and payments</li>
+                    <li>Operate and maintain StepaKash services</li>
+                    <li>Process transactions and facilitate payments</li>
                     <li>Verify your identity and prevent fraud</li>
-                    <li>Comply with legal and regulatory requirements</li>
-                    <li>Communicate with you about your account and services</li>
-                    <li>Improve our services and user experience</li>
+                    <li>Meet legal and regulatory obligations</li>
+                    <li>Communicate essential account updates</li>
+                    <li>Improve platform features and user experience</li>
                 </ul>
             </div>
 
-            <h2>Information Sharing</h2>
+            <h2>When We Share Your Information</h2>
             <div class="privacy-section">
-                <h3>When We Share Information</h3>
-                <p>We may share your information in the following circumstances:</p>
+                <p>We may disclose your information only in the following cases:</p>
                 <ul>
-                    <li>With regulatory authorities and law enforcement when required by law</li>
-                    <li>With our trusted service providers who assist in operating our services</li>
-                    <li>With financial institutions to process transactions</li>
-                    <li>In case of business transfers or mergers</li>
-                    <li>With your explicit consent</li>
+                    <li><strong>Legal Requirements:</strong> With regulatory authorities or law enforcement as mandated by law</li>
+                    <li><strong>Service Providers:</strong> With partners who support service delivery (e.g., infrastructure, customer support)</li>
+                    <li><strong>Financial Institutions:</strong> To execute transactions securely</li>
+                    <li><strong>Business Restructuring:</strong> During mergers, acquisitions, or business transfers</li>
+                    <li><strong>With Your Consent:</strong> In cases where you explicitly authorize it</li>
                 </ul>
             </div>
 
             <div class="highlight-box">
                 <h3>Important Note</h3>
-                <p>We do not sell, rent, or trade your personal information to third parties for marketing purposes. Your financial data is encrypted and stored securely in compliance with industry standards.</p>
+                <p><strong>Note:</strong> We do not sell, rent, or trade your personal data to third parties for marketing. Your financial data is encrypted and stored in compliance with industry-standard protocols.</p>
             </div>
 
             <h2>Data Security</h2>
             <div class="privacy-section">
-                <h3>Security Measures</h3>
-                <p>We implement robust security measures including:</p>
+                <p>We employ strict measures to protect your personal information, including:</p>
                 <ul>
-                    <li>End-to-end encryption for all transactions</li>
-                    <li>Multi-factor authentication</li>
-                    <li>Regular security audits and monitoring</li>
-                    <li>Secure data centers with 24/7 monitoring</li>
-                    <li>Employee training on data protection</li>
+                    <li>End-to-end encryption of all data and transactions</li>
+                    <li>Multi-factor authentication (MFA) for user access</li>
+                    <li>Regular security audits and threat monitoring</li>
+                    <li>Secure, monitored data centers</li>
+                    <li>Employee training on data privacy and handling</li>
                 </ul>
             </div>
 
             <h2>Your Rights</h2>
             <div class="privacy-section">
-                <h3>Data Protection Rights</h3>
                 <p>You have the right to:</p>
                 <ul>
-                    <li>Access your personal information</li>
-                    <li>Request correction of inaccurate data</li>
-                    <li>Request deletion of your data (subject to legal requirements)</li>
-                    <li>Object to processing of your information</li>
-                    <li>Request data portability</li>
-                    <li>Withdraw consent where applicable</li>
+                    <li><strong>Access</strong> the personal data we hold about you</li>
+                    <li><strong>Request corrections</strong> to inaccurate or outdated information</li>
+                    <li><strong>Request deletion</strong> of your data (subject to compliance requirements)</li>
+                    <li><strong>Object to or restrict processing</strong> of your data</li>
+                    <li><strong>Request portability</strong> of your personal data</li>
+                    <li><strong>Withdraw consent</strong> where previously granted</li>
                 </ul>
+                <p>To exercise any of these rights, please contact us via the details provided below.</p>
             </div>
 
             <h2>Data Retention</h2>
             <div class="privacy-section">
-                <h3>Retention Policy</h3>
-                <p>We retain your personal information for as long as necessary to:</p>
+                <p>We retain your personal data only as long as necessary to:</p>
                 <ul>
-                    <li>Provide our services to you</li>
-                    <li>Comply with legal and regulatory obligations</li>
+                    <li>Deliver our services</li>
+                    <li>Fulfill legal and regulatory requirements</li>
                     <li>Resolve disputes and enforce agreements</li>
-                    <li>Prevent fraud and ensure security</li>
+                    <li>Prevent fraud and ensure platform security</li>
                 </ul>
-                <p>Typically, we retain account information for 7 years after account closure, as required by financial regulations.</p>
+                <p><strong>Standard retention period:</strong> 7 years from account closure, in line with financial regulatory standards.</p>
             </div>
 
             <h2>Updates to This Policy</h2>
             <div class="privacy-section">
-                <p>We may update this Privacy Policy from time to time. We will notify you of any material changes by posting the new Privacy Policy on our website and updating the effective date. Your continued use of our services after such changes constitutes acceptance of the updated policy.</p>
+                <p>We may revise this Privacy Policy periodically. In the event of material changes, we will:</p>
+                <ul>
+                    <li>Post the updated version on our official website</li>
+                    <li>Update the "Effective Date"</li>
+                    <li>Notify you where appropriate</li>
+                </ul>
+                <p>Continued use of StepaKash after changes are made implies acceptance of the revised policy.</p>
             </div>
 
             <div class="contact-section">
-                <h3>Contact Us</h3>
-                <p>If you have any questions about this Privacy Policy or wish to exercise your rights, please contact us at:</p>
+                <h2>Contact Us</h2>
+                <p>For any questions, concerns, or data access requests, reach out to us via:</p>
                 <p><strong>Email:</strong> info@stepakash.com</p>
                 <p><strong>Phone:</strong> +254 741 554 994</p>
                 <p><strong>Address:</strong> Nairobi, Kenya</p>
@@ -401,7 +459,7 @@ ol li::before {
         </div>
         
         <div class="footer">
-            <p>&copy; <?php echo date('Y'); ?> StepaKash. All rights reserved. | Last updated: <?php echo date('F j, Y'); ?></p>
+            <p>&copy; <?php echo date('Y'); ?> StepaKash. All rights reserved. | Last Updated: August 8th, 2025</p>
         </div>
     </div>
 </body>
