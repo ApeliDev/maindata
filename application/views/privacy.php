@@ -344,7 +344,7 @@ ol li::before {
 <body>
     <div class="container">
         <div class="header">
-            <h1>STEPAKASH</h1>
+            <img src="<?php echo base_url() ?>assets/img/home-header-stepakash.png" alt="Stepakash" style="max-width: 220px; margin-bottom: 10px;">
             <p class="subtitle">Privacy Policy</p>
         </div>
         
