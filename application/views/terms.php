@@ -288,7 +288,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <img src="<?php echo base_url() ?>assets/img/home-header-stepakash.png" alt="Stepakash" style="max-width: 220px; margin-bottom: 10px;">
+            <img src="<?php echo base_url() ?>assets/img/home-header-stepakash.png" alt="Stepakash" style="max-width: 220px; margin-bottom: 10px; filter: brightness(0) invert(1);">
             <p class="subtitle">Terms of Use & Conditions</p>
         </div>
         
