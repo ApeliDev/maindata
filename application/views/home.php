@@ -619,7 +619,7 @@ if(!empty($checkout_token))
     </div> -->
 
     <!-- Withdraw (Receive) Modal -->
-    <div id="withdrawModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div id="withdrawModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-md max-h-full">
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
@@ -632,6 +632,46 @@ if(!empty($checkout_token))
                         <span class="sr-only">Close modal</span>
                     </button>
                 </div>
+                
+                <!-- Withdrawal Instructions -->
+                <div class="p-4 md:p-5 bg-blue-50 dark:bg-gray-800 border-b dark:border-gray-600">
+                    <h4 class="text-sm font-medium text-blue-900 dark:text-blue-200 mb-2">Withdrawal Steps:</h4>
+                    <ol class="text-xs text-blue-800 dark:text-blue-300 space-y-2 list-decimal list-inside">
+                        <li class="flex items-start justify-between">
+                            <span class="flex-1">Copy this link: <a href="https://hub.deriv.com/tradershub/wallets/payment-agent?PaymentType=withdraw" target="_blank" class="underline hover:no-underline break-all">https://hub.deriv.com/tradershub/wallets/payment-agent?PaymentType=withdraw</a></span>
+                            <button type="button" onclick="copyDerivLink()" class="ml-2 px-2 py-1 bg-blue-600 hover:bg-blue-700 text-white text-xs rounded focus:outline-none focus:ring-2 focus:ring-blue-500 flex-shrink-0">
+                                <i class="fas fa-copy mr-1"></i>Copy
+                            </button>
+                        </li>
+                        <li>Complete the verification process via the email link sent to you</li>
+                        <li>Search for "stepakash official" on the platform</li>
+                        <li>Enter the same amount as requested on this website</li>
+                    </ol>
+                </div>
+                
+                <script>
+                function copyDerivLink() {
+                    const link = "https://hub.deriv.com/tradershub/wallets/payment-agent?PaymentType=withdraw";
+                    navigator.clipboard.writeText(link).then(function() {
+                        // Show success feedback
+                        const button = event.target.closest('button');
+                        const originalText = button.innerHTML;
+                        button.innerHTML = '<i class="fas fa-check mr-1"></i>Copied!';
+                        button.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+                        button.classList.add('bg-green-600');
+                        
+                        setTimeout(function() {
+                            button.innerHTML = originalText;
+                            button.classList.remove('bg-green-600');
+                            button.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                        }, 2000);
+                    }).catch(function(err) {
+                        console.error('Could not copy text: ', err);
+                        alert('Failed to copy link. Please copy manually.');
+                    });
+                }
+                </script>
+                
                 <form method="POST" action="<?php echo base_url() ?>Main/WithdrawFromDeriv" onsubmit="return disableSubmitButtonWithdraw()">
                     <div class="p-4 md:p-5 space-y-4">
                         <div>
@@ -645,6 +685,17 @@ if(!empty($checkout_token))
                             <div class="error-message-amount-withdraw text-red-500 text-xs mt-1"></div>
                         </div>
                     </div>
+                    
+                    <!-- Important Note -->
+                    <div class="px-4 md:px-5 pb-4">
+                        <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-3">
+                            <p class="text-xs text-yellow-800 dark:text-yellow-200 font-medium">
+                                <i class="fas fa-info-circle mr-1"></i>
+                                NB: All operations will be done on the website soon
+                            </p>
+                        </div>
+                    </div>
+                    
                     <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
                         <button type="submit" id="withdrawButton" disabled class="text-white bg-gradient-primary hover:opacity-90 focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:opacity-50 disabled:cursor-not-allowed">
                             Withdraw
@@ -657,7 +708,7 @@ if(!empty($checkout_token))
             </div>
         </div>
     </div>
-
+    
     <!-- 
     <div id="withdrawModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-md max-h-full">
