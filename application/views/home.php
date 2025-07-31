@@ -824,6 +824,63 @@ if(!empty($checkout_token))
         </div>
     </div>
 
+
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const amountInput = document.getElementById('amountdepo');
+    const usdAmountContainer = document.getElementById('usdAmountContainer');
+    const usdAmountDisplay = document.getElementById('usdAmount');
+    const currentRateDisplay = document.getElementById('currentRate');
+    const depositButton = document.getElementById('depo');
+    
+    // Get the current buy rate from your PHP variable or make an AJAX call
+    // Here I'm assuming you have the rate available in a JavaScript variable
+    // If not, you might need to make an AJAX call to get the current rate
+    const buyRate = <?php echo $buyrate[0]['kes'] ?? '0'; ?>;
+    
+    // Update the rate display
+    currentRateDisplay.textContent = `1 USD = ${buyRate} KES`;
+    
+    // Add event listener for amount input
+    amountInput.addEventListener('input', function() {
+        const kesAmount = parseFloat(this.value);
+        
+        if (kesAmount && !isNaN(kesAmount) && kesAmount > 0) {
+            // Calculate USD amount
+            const usdAmount = kesAmount / buyRate;
+            
+            // Display the USD amount with 2 decimal places
+            usdAmountDisplay.textContent = `$${usdAmount.toFixed(2)} USD`;
+            
+            // Show the container
+            usdAmountContainer.classList.remove('hidden');
+            
+            // Enable the deposit button if amount is valid
+            if (usdAmount >= 1.0) {  // Minimum $1.00
+                depositButton.disabled = false;
+            } else {
+                depositButton.disabled = true;
+            }
+        } else {
+            // Hide the container if amount is invalid
+            usdAmountContainer.classList.add('hidden');
+            depositButton.disabled = true;
+        }
+    });
+    
+    // Also validate on form submit
+    document.querySelector('form').addEventListener('submit', function(e) {
+        const kesAmount = parseFloat(amountInput.value);
+        const usdAmount = kesAmount / buyRate;
+        
+        if (usdAmount < 1.0) {
+            e.preventDefault();
+            alert('The amount must be at least $1.00 USD equivalent.');
+        }
+    });
+});
+</script>
+
     <!-- Hidden div for printing -->
     <div id="printableReceipt" style="display: none;"></div>
 
