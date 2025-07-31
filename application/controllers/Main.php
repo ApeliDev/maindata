@@ -50,37 +50,43 @@ class Main extends CI_Controller {
 
     // Main Application Functions
     public function home() {
-        $url = APP_INSTANCE.'home_data';
-        $session_id = $this->session->userdata('session_id');
+    $url = APP_INSTANCE.'home_data';
+    $session_id = $this->session->userdata('session_id');
 
-        $body = array(
-            'session_id' => $session_id,
-        );
+    $body = array(
+        'session_id' => $session_id,
+    );
 
-        $response = $this->Operations->CurlPost($url, $body);
-        $decode = json_decode($response, true);
+    $response = $this->Operations->CurlPost($url, $body);
+    $decode = json_decode($response, true);
+    
+    $status = $decode['status'];
+    $message = $decode['message'];
+    $data = $decode['data'];
+    
+    if($status == 'fail') {
+        $this->session->set_flashdata('msg', $message);
+        redirect('logout');
+    } elseif($status == 'success' || $status == 'error') {
+        $response = $data;
         
-        $status = $decode['status'];
-        $message = $decode['message'];
-        $data = $decode['data'];
+        // Extract the buyrate for the modal
+        $buyrate_value = isset($data['buyrate']) ? $data['buyrate'] : 0;
+        $response['buyrate_js'] = $buyrate_value; // For JavaScript access
         
-        if($status == 'fail') {
-            $this->session->set_flashdata('msg', $message);
-            redirect('logout');
-        } elseif($status == 'success' || $status == 'error') {
-            $response = $data;
-            
-            // Make sure buyrate is passed to the view
-            $response['buyrate'] = $data['buyrate'] ?? 0;
-            
-            $this->load->view('includes/header');
-            $this->load->view('home', $response);
-            $this->load->view('includes/footer', $response);
-        } else {
-            $this->session->set_flashdata('msg', 'something went wrong');
-            redirect('logout');
+        // Pass the buyrate array for the existing functionality
+        if (isset($data['buyrate'])) {
+            $response['buyrate'] = array(array('kes' => $data['buyrate']));
         }
+        
+        $this->load->view('includes/header');
+        $this->load->view('home', $response);
+        $this->load->view('includes/footer', $response);
+    } else {
+        $this->session->set_flashdata('msg', 'something went wrong');
+        redirect('logout');
     }
+}
     
     public function transactions() {
         $url = APP_INSTANCE.'home_data';

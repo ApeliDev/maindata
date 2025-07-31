@@ -540,54 +540,202 @@ if(!empty($checkout_token))
         </div>
     </div>
 
-    <!-- Deposit (Transfer) Modal -->
-    <div id="depositModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-        <div class="relative p-4 w-full max-w-md max-h-full">
-            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                        Transfer to Deriv
-                    </h3>
-                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="depositModal">
-                        <i class="fas fa-times"></i>
-                        <span class="sr-only">Close modal</span>
+    <!-- Replace your existing Deposit Modal with this updated version -->
+<div id="depositModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-md max-h-full">
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                    Transfer to Deriv
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="depositModal">
+                    <i class="fas fa-times"></i>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            
+            <form method="POST" action="<?php echo base_url() ?>Main/DepositToDeriv" onsubmit="return disableDepositButton()">
+                <div class="p-4 md:p-5 space-y-4">
+                    <!-- Current Exchange Rate Display -->
+                    <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3 mb-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium text-blue-900 dark:text-blue-200">Current Rate:</span>
+                            <span class="text-lg font-semibold text-blue-900 dark:text-blue-200">
+                                1 USD = <?php echo isset($buyrate) && !empty($buyrate) ? number_format($buyrate[0]['kes'], 2) : '0.00'; ?> KES
+                            </span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="crNumberdepo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CR Number</label>
+                        <input type="text" id="crNumberdepo" name="crNumber" style="text-transform: uppercase;" value="<?php echo $this->session->userdata('account_number'); ?>" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="eg.CR1234567" readonly required>
+                        <div class="error-message-cr text-red-500 text-xs mt-1"></div>
+                    </div>
+                    
+                    <div>
+                        <label for="amountdepo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount (KES)</label>
+                        <input type="number" id="amountdepo" name="amount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Enter amount in KES" autocomplete="off" required>
+                        <div class="error-message-amount text-red-500 text-xs mt-1"></div>
+                    </div>
+                    
+                    <!-- USD Amount Display -->
+                    <div id="usdAmountContainer" class="hidden">
+                        <div class="flex items-center justify-between p-4 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-lg border border-green-200 dark:border-green-800 rate-highlight">
+                            <div class="flex flex-col">
+                                <span class="text-sm font-medium text-gray-700 dark:text-gray-300">You will receive:</span>
+                                <span class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                    Rate: <span id="currentRate">1 USD = <?php echo isset($buyrate) && !empty($buyrate) ? number_format($buyrate[0]['kes'], 2) : '0.00'; ?> KES</span>
+                                </span>
+                            </div>
+                            <div class="text-right">
+                                <span id="usdAmount" class="text-xl font-bold text-green-600 dark:text-green-400 usd-amount-highlight">$0.00 USD</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Minimum Amount Notice -->
+                    <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-3">
+                        <div class="flex items-center">
+                            <i class="fas fa-info-circle text-yellow-600 dark:text-yellow-400 mr-2"></i>
+                            <span class="text-xs text-yellow-800 dark:text-yellow-200">
+                                Minimum deposit: $1.00 USD
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                    <button type="submit" id="depo" disabled class="text-white bg-gradient-primary hover:opacity-90 focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:opacity-50 disabled:cursor-not-allowed pulse-green">
+                        Fund Account
+                    </button>
+                    <button data-modal-hide="depositModal" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                        Cancel
                     </button>
                 </div>
-                <form method="POST" action="<?php echo base_url() ?>Main/DepositToDeriv" onsubmit="return disableDepositButton()">
-                    <div class="p-4 md:p-5 space-y-4">
-                        <div>
-                            <label for="crNumberdepo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CR Number</label>
-                            <input type="text" id="crNumberdepo" name="crNumber" style="text-transform: uppercase;" value="<?php echo $this->session->userdata('account_number'); ?>" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="eg.CR1234567" readonly required>
-                            <div class="error-message-cr text-red-500 text-xs mt-1"></div>
-                        </div>
-                        <div>
-                            <label for="amountdepo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount (KES)</label>
-                            <input type="number" id="amountdepo" name="amount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Enter amount in KES" autocomplete="off" required>
-                            <div class="error-message-amount text-red-500 text-xs mt-1"></div>
-                        </div>
-                        <!-- Add this new div to show the USD amount -->
-                        <!-- <div id="usdAmountContainer" class="hidden">
-                            <div class="flex items-center justify-between p-3 bg-gray-100 dark:bg-gray-800 rounded-lg">
-                                <span class="text-sm font-medium text-gray-700 dark:text-gray-300">You will receive:</span>
-                                <span id="usdAmount" class="text-lg font-semibold text-primary dark:text-primary-300">$0.00 USD</span>
-                            </div>
-                            <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                                Rate: <span id="currentRate">1 USD = <?php echo $buyrate[0]['kes'] ?? '0'; ?> KES</span>
-                            </div>
-                        </div> -->
-                    </div>
-                    <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                        <button type="submit" id="depo" disabled class="text-white bg-gradient-primary hover:opacity-90 focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:opacity-50 disabled:cursor-not-allowed">
-                            Fund Account
-                        </button>
-                        <button data-modal-hide="depositModal" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
-                            Cancel
-                        </button>
-                    </div>
-                </form>
-            </div>
+            </form>
         </div>
     </div>
+</div>
+
+<!-- Add this script to your existing JavaScript section -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Get the exchange rate from PHP
+    const exchangeRate = <?php echo isset($buyrate) && !empty($buyrate) ? $buyrate[0]['kes'] : 'null'; ?>;
+    
+    if (!exchangeRate) {
+        console.error('Exchange rate not available');
+        return;
+    }
+    
+    // Get form elements
+    const amountInput = document.getElementById('amountdepo');
+    const usdAmountContainer = document.getElementById('usdAmountContainer');
+    const usdAmountDisplay = document.getElementById('usdAmount');
+    const currentRateDisplay = document.getElementById('currentRate');
+    const depositButton = document.getElementById('depo');
+    const crNumberInput = document.getElementById('crNumberdepo');
+
+    // Function to format numbers with commas
+    function formatNumber(num) {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    // Function to calculate and display USD amount
+    function calculateAndDisplayUSD() {
+        const kesAmount = parseFloat(amountInput.value) || 0;
+        
+        if (kesAmount > 0) {
+            const usdAmount = (kesAmount / exchangeRate).toFixed(2);
+            
+            // Show the USD amount container with animation
+            if (usdAmountContainer.classList.contains('hidden')) {
+                usdAmountContainer.classList.remove('hidden');
+                usdAmountContainer.style.opacity = '0';
+                usdAmountContainer.style.transform = 'translateY(-10px)';
+                
+                setTimeout(() => {
+                    usdAmountContainer.style.transition = 'all 0.3s ease';
+                    usdAmountContainer.style.opacity = '1';
+                    usdAmountContainer.style.transform = 'translateY(0)';
+                }, 10);
+            }
+            
+            // Update the displays
+            usdAmountDisplay.textContent = `$${formatNumber(usdAmount)} USD`;
+            currentRateDisplay.textContent = `1 USD = ${formatNumber(exchangeRate)} KES`;
+            
+        } else {
+            // Hide the USD amount container
+            if (!usdAmountContainer.classList.contains('hidden')) {
+                usdAmountContainer.style.transition = 'all 0.3s ease';
+                usdAmountContainer.style.opacity = '0';
+                usdAmountContainer.style.transform = 'translateY(-10px)';
+                
+                setTimeout(() => {
+                    usdAmountContainer.classList.add('hidden');
+                }, 300);
+            }
+        }
+        
+        validateForm();
+    }
+
+    // Function to validate the entire form
+    function validateForm() {
+        const crNumberValid = /^CR\d{7}$/.test(crNumberInput.value.toUpperCase());
+        const kesAmount = parseFloat(amountInput.value) || 0;
+        const usdAmount = kesAmount / exchangeRate;
+        
+        // Check validation conditions
+        const formValid = crNumberValid && usdAmount >= 1.00 && kesAmount > 0;
+        
+        // Enable/disable button
+        depositButton.disabled = !formValid;
+        if (formValid) {
+            depositButton.classList.remove('opacity-50', 'cursor-not-allowed');
+            depositButton.classList.add('pulse-green');
+        } else {
+            depositButton.classList.add('opacity-50', 'cursor-not-allowed');
+            depositButton.classList.remove('pulse-green');
+        }
+        
+        // Update error messages
+        const crError = document.querySelector('.error-message-cr');
+        const amountError = document.querySelector('.error-message-amount');
+        
+        if (crError) {
+            crError.textContent = crNumberValid ? '' : 'CR number must be in format CR1234567';
+        }
+        
+        if (amountError) {
+            if (kesAmount > 0 && usdAmount < 1.00) {
+                amountError.textContent = 'Minimum deposit is $1.00 USD (KES ' + formatNumber((1.00 * exchangeRate).toFixed(0)) + ')';
+            } else if (kesAmount <= 0 && amountInput.value !== '') {
+                amountError.textContent = 'Amount must be greater than 0';
+            } else {
+                amountError.textContent = '';
+            }
+        }
+    }
+
+    // Add event listeners
+    if (amountInput) {
+        amountInput.addEventListener('input', calculateAndDisplayUSD);
+        amountInput.addEventListener('paste', function() {
+            setTimeout(calculateAndDisplayUSD, 10);
+        });
+        amountInput.addEventListener('change', calculateAndDisplayUSD);
+    }
+
+    if (crNumberInput) {
+        crNumberInput.addEventListener('input', validateForm);
+    }
+
+    // Initialize validation
+    validateForm();
+});
+</script>
 
     <!-- <div id="depositModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-md max-h-full">
@@ -823,6 +971,235 @@ if(!empty($checkout_token))
             </div>
         </div>
     </div>
+
+
+    <script>
+        // Add this JavaScript code to your existing script section
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Get the exchange rate from PHP (passed to JavaScript)
+    const exchangeRate = <?php echo isset($buyrate) && !empty($buyrate) ? $buyrate : 'null'; ?>;
+    
+    // Get form elements
+    const amountInput = document.getElementById('amountdepo');
+    const usdAmountContainer = document.getElementById('usdAmountContainer');
+    const usdAmountDisplay = document.getElementById('usdAmount');
+    const currentRateDisplay = document.getElementById('currentRate');
+    const depositButton = document.getElementById('depo');
+
+    // Function to calculate and display USD amount
+    function calculateAndDisplayUSD() {
+        const kesAmount = parseFloat(amountInput.value) || 0;
+        
+        if (kesAmount > 0 && exchangeRate && exchangeRate > 0) {
+            const usdAmount = (kesAmount / exchangeRate).toFixed(2);
+            
+            // Show the USD amount container
+            usdAmountContainer.classList.remove('hidden');
+            
+            // Update the displays
+            usdAmountDisplay.textContent = `$${usdAmount} USD`;
+            currentRateDisplay.textContent = `1 USD = ${exchangeRate} KES`;
+            
+            // Enable the deposit button if amount is valid
+            if (parseFloat(usdAmount) >= 1.00) {
+                depositButton.disabled = false;
+                depositButton.classList.remove('opacity-50', 'cursor-not-allowed');
+            } else {
+                depositButton.disabled = true;
+                depositButton.classList.add('opacity-50', 'cursor-not-allowed');
+                
+                // Show minimum amount warning
+                const errorDiv = document.querySelector('.error-message-amount');
+                if (errorDiv) {
+                    errorDiv.textContent = 'Minimum deposit is $1.00 USD';
+                }
+            }
+        } else {
+            // Hide the USD amount container if no valid amount
+            usdAmountContainer.classList.add('hidden');
+            depositButton.disabled = true;
+            depositButton.classList.add('opacity-50', 'cursor-not-allowed');
+        }
+    }
+
+    // Function to validate the entire form
+    function validateDepositForm() {
+        const crNumberInput = document.getElementById('crNumberdepo');
+        const crNumberValid = /^CR\d{7}$/.test(crNumberInput.value.toUpperCase());
+        const kesAmount = parseFloat(amountInput.value) || 0;
+        const usdAmount = kesAmount / exchangeRate;
+        
+        // Check if both CR number is valid and USD amount is at least $1
+        const formValid = crNumberValid && usdAmount >= 1.00 && kesAmount > 0;
+        
+        // Enable/disable button based on validation
+        depositButton.disabled = !formValid;
+        if (formValid) {
+            depositButton.classList.remove('opacity-50', 'cursor-not-allowed');
+        } else {
+            depositButton.classList.add('opacity-50', 'cursor-not-allowed');
+        }
+        
+        // Update error messages
+        const crError = document.querySelector('.error-message-cr');
+        const amountError = document.querySelector('.error-message-amount');
+        
+        if (crError) {
+            crError.textContent = crNumberValid ? '' : 'CR number must be in format CR1234567';
+        }
+        
+        if (amountError) {
+            if (kesAmount > 0 && usdAmount < 1.00) {
+                amountError.textContent = 'Minimum deposit is $1.00 USD';
+            } else if (kesAmount <= 0) {
+                amountError.textContent = 'Amount must be greater than 0';
+            } else {
+                amountError.textContent = '';
+            }
+        }
+    }
+
+    // Add event listeners
+    if (amountInput) {
+        // Update USD display as user types
+        amountInput.addEventListener('input', function() {
+            calculateAndDisplayUSD();
+            validateDepositForm();
+        });
+        
+        // Also trigger on paste and change events
+        amountInput.addEventListener('paste', function() {
+            setTimeout(calculateAndDisplayUSD, 10);
+        });
+        
+        amountInput.addEventListener('change', function() {
+            calculateAndDisplayUSD();
+            validateDepositForm();
+        });
+    }
+
+    // Add CR number validation
+    const crNumberInput = document.getElementById('crNumberdepo');
+    if (crNumberInput) {
+        crNumberInput.addEventListener('input', validateDepositForm);
+    }
+
+    // Initialize on page load
+    if (exchangeRate) {
+        calculateAndDisplayUSD();
+        validateDepositForm();
+    } else {
+        console.error('Exchange rate not available');
+        // Show error message to user
+        const errorDiv = document.querySelector('.error-message-amount');
+        if (errorDiv) {
+            errorDiv.textContent = 'Exchange rate not available. Please refresh the page.';
+        }
+    }
+
+    // Function to format numbers with commas
+    function formatNumber(num) {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    // Enhanced calculation with formatting
+    function calculateAndDisplayUSDEnhanced() {
+        const kesAmount = parseFloat(amountInput.value) || 0;
+        
+        if (kesAmount > 0 && exchangeRate && exchangeRate > 0) {
+            const usdAmount = (kesAmount / exchangeRate).toFixed(2);
+            
+            // Show the USD amount container with animation
+            usdAmountContainer.classList.remove('hidden');
+            usdAmountContainer.style.opacity = '0';
+            usdAmountContainer.style.transform = 'translateY(-10px)';
+            
+            setTimeout(() => {
+                usdAmountContainer.style.transition = 'all 0.3s ease';
+                usdAmountContainer.style.opacity = '1';
+                usdAmountContainer.style.transform = 'translateY(0)';
+            }, 10);
+            
+            // Update the displays with formatted numbers
+            usdAmountDisplay.textContent = `$${formatNumber(usdAmount)} USD`;
+            currentRateDisplay.textContent = `1 USD = ${formatNumber(exchangeRate)} KES`;
+            
+            // Validation logic
+            if (parseFloat(usdAmount) >= 1.00) {
+                depositButton.disabled = false;
+                depositButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                
+                // Clear any error messages
+                const errorDiv = document.querySelector('.error-message-amount');
+                if (errorDiv) {
+                    errorDiv.textContent = '';
+                }
+            } else {
+                depositButton.disabled = true;
+                depositButton.classList.add('opacity-50', 'cursor-not-allowed');
+                
+                // Show minimum amount warning
+                const errorDiv = document.querySelector('.error-message-amount');
+                if (errorDiv) {
+                    errorDiv.textContent = 'Minimum deposit is $1.00 USD';
+                }
+            }
+        } else {
+            // Hide the USD amount container with animation
+            usdAmountContainer.style.transition = 'all 0.3s ease';
+            usdAmountContainer.style.opacity = '0';
+            usdAmountContainer.style.transform = 'translateY(-10px)';
+            
+            setTimeout(() => {
+                usdAmountContainer.classList.add('hidden');
+            }, 300);
+            
+            depositButton.disabled = true;
+            depositButton.classList.add('opacity-50', 'cursor-not-allowed');
+        }
+    }
+
+    // Replace the basic function with the enhanced one
+    amountInput.removeEventListener('input', calculateAndDisplayUSD);
+    amountInput.addEventListener('input', calculateAndDisplayUSDEnhanced);
+});
+
+// Add this CSS for smooth transitions (add to your existing styles)
+const additionalStyles = `
+<style>
+#usdAmountContainer {
+    transition: all 0.3s ease;
+}
+
+.rate-highlight {
+    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+    border-left: 4px solid #10b981;
+}
+
+.usd-amount-highlight {
+    font-weight: 600;
+    color: #10b981;
+}
+
+@keyframes pulse-green {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+    }
+}
+
+.pulse-green {
+    animation: pulse-green 2s infinite;
+}
+</style>
+`;
+
+// Inject the additional styles
+document.head.insertAdjacentHTML('beforeend', additionalStyles);
+    </script>
 
 
     
