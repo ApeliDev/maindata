@@ -354,7 +354,7 @@ ol li::before {
             </div>
 
             <div class="intro-section">
-                <p><strong>Effective Date:</strong> August 8, 2025</p>
+                <!-- <p><strong>Effective Date:</strong> August 8, 2025</p> -->
                 <p>At <strong>StepaKash</strong>, your privacy is our priority. This Privacy Policy outlines how we collect, use, share, and safeguard your personal data when you engage with our digital financial services.</p>
             </div>
 
