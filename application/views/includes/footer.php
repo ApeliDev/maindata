@@ -111,6 +111,33 @@
         });
     }
 
+    // Add this new function to calculate and display USD amount
+    const amountInputUSD = document.getElementById('amountdepo');
+    const usdAmountContainer = document.getElementById('usdAmountContainer');
+    const usdAmount = document.getElementById('usdAmount');
+    const currentRate = document.getElementById('currentRate');
+
+    if (amountInputUSD && usdAmountContainer && usdAmount && currentRate) {
+        // Get the rate from PHP (passed in the modal)
+        const exchangeRate = parseFloat(currentRate.textContent.replace('1 USD = ', '').replace(' KES', '')) || 0;
+        
+        amountInputUSD.addEventListener('input', function() {
+            const kesAmount = parseFloat(this.value) || 0;
+            
+            if (kesAmount > 0) {
+                // Calculate USD amount
+                const usdValue = (kesAmount / exchangeRate).toFixed(2);
+                usdAmount.textContent = `$${usdValue} USD`;
+                
+                // Show the container
+                usdAmountContainer.classList.remove('hidden');
+            } else {
+                // Hide the container if amount is 0 or invalid
+                usdAmountContainer.classList.add('hidden');
+            }
+        });
+    }
+
     // Transaction modal handling
     const transactionModalElement = document.getElementById('transactionModal');
     const transactionDetails = document.getElementById('transactionDetails');
@@ -359,18 +386,6 @@
             }, 500);
         }, 3000);
     };
-    // Keepalive ping to server
-    const APP_INSTANCE = '<?php echo APP_INSTANCE; ?>'; // Ensure this is defined in your PHP context
-    setInterval(function() {
-        fetch(APP_INSTANCE + 'keepalive', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                session_id: getSessionId() // Implement this function
-            })
-        });
-    }, 300000); // Ping every 5 minutes
+
 });
 </script>

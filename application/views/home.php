@@ -542,52 +542,52 @@ if(!empty($checkout_token))
 
     <!-- Deposit (Transfer) Modal -->
     <div id="depositModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative p-4 w-full max-w-md max-h-full">
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                    Transfer to Deriv
-                </h3>
-                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="depositModal">
-                    <i class="fas fa-times"></i>
-                    <span class="sr-only">Close modal</span>
-                </button>
+        <div class="relative p-4 w-full max-w-md max-h-full">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                        Transfer to Deriv
+                    </h3>
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="depositModal">
+                        <i class="fas fa-times"></i>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <form method="POST" action="<?php echo base_url() ?>Main/DepositToDeriv" onsubmit="return disableDepositButton()">
+                    <div class="p-4 md:p-5 space-y-4">
+                        <div>
+                            <label for="crNumberdepo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CR Number</label>
+                            <input type="text" id="crNumberdepo" name="crNumber" style="text-transform: uppercase;" value="<?php echo $this->session->userdata('account_number'); ?>" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="eg.CR1234567" readonly required>
+                            <div class="error-message-cr text-red-500 text-xs mt-1"></div>
+                        </div>
+                        <div>
+                            <label for="amountdepo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount (KES)</label>
+                            <input type="number" id="amountdepo" name="amount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Enter amount in KES" autocomplete="off" required>
+                            <div class="error-message-amount text-red-500 text-xs mt-1"></div>
+                        </div>
+                        <!-- Add this new div to show the USD amount -->
+                        <div id="usdAmountContainer" class="hidden">
+                            <div class="flex items-center justify-between p-3 bg-gray-100 dark:bg-gray-800 rounded-lg">
+                                <span class="text-sm font-medium text-gray-700 dark:text-gray-300">You will receive:</span>
+                                <span id="usdAmount" class="text-lg font-semibold text-primary dark:text-primary-300">$0.00 USD</span>
+                            </div>
+                            <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                Rate: <span id="currentRate">1 USD = <?php echo $buyrate[0]['kes'] ?? '0'; ?> KES</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                        <button type="submit" id="depo" disabled class="text-white bg-gradient-primary hover:opacity-90 focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:opacity-50 disabled:cursor-not-allowed">
+                            Fund Account
+                        </button>
+                        <button data-modal-hide="depositModal" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
             </div>
-            <form method="POST" action="<?php echo base_url() ?>Main/DepositToDeriv" onsubmit="return disableDepositButton()">
-                <div class="p-4 md:p-5 space-y-4">
-                    <div>
-                        <label for="crNumberdepo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CR Number</label>
-                        <input type="text" id="crNumberdepo" name="crNumber" style="text-transform: uppercase;" value="<?php echo $this->session->userdata('account_number'); ?>" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="eg.CR1234567" readonly required>
-                        <div class="error-message-cr text-red-500 text-xs mt-1"></div>
-                    </div>
-                    <div>
-                        <label for="amountdepo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount (KES)</label>
-                        <input type="number" id="amountdepo" name="amount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Enter amount in KES" autocomplete="off" required>
-                        <div class="error-message-amount text-red-500 text-xs mt-1"></div>
-                    </div>
-                    <!-- Add this new div to show the USD amount -->
-                    <div id="usdAmountContainer" class="hidden">
-                        <div class="flex items-center justify-between p-3 bg-gray-100 dark:bg-gray-800 rounded-lg">
-                            <span class="text-sm font-medium text-gray-700 dark:text-gray-300">You will receive:</span>
-                            <span id="usdAmount" class="text-lg font-semibold text-primary dark:text-primary-300">$0.00 USD</span>
-                        </div>
-                        <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                            Rate: <span id="currentRate">1 USD = <?php echo $buyrate[0]['kes'] ?? '0'; ?> KES</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                    <button type="submit" id="depo" disabled class="text-white bg-gradient-primary hover:opacity-90 focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:opacity-50 disabled:cursor-not-allowed">
-                        Fund Account
-                    </button>
-                    <button data-modal-hide="depositModal" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
-                        Cancel
-                    </button>
-                </div>
-            </form>
         </div>
     </div>
-</div>
 
     <!-- <div id="depositModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-md max-h-full">
@@ -825,61 +825,7 @@ if(!empty($checkout_token))
     </div>
 
 
-    <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const amountInput = document.getElementById('amountdepo');
-    const usdAmountContainer = document.getElementById('usdAmountContainer');
-    const usdAmountDisplay = document.getElementById('usdAmount');
-    const currentRateDisplay = document.getElementById('currentRate');
-    const depositButton = document.getElementById('depo');
     
-    // Get the current buy rate from your PHP variable or make an AJAX call
-    // Here I'm assuming you have the rate available in a JavaScript variable
-    // If not, you might need to make an AJAX call to get the current rate
-    const buyRate = <?php echo $buyrate[0]['kes'] ?? '0'; ?>;
-    
-    // Update the rate display
-    currentRateDisplay.textContent = `1 USD = ${buyRate} KES`;
-    
-    // Add event listener for amount input
-    amountInput.addEventListener('input', function() {
-        const kesAmount = parseFloat(this.value);
-        
-        if (kesAmount && !isNaN(kesAmount) && kesAmount > 0) {
-            // Calculate USD amount
-            const usdAmount = kesAmount / buyRate;
-            
-            // Display the USD amount with 2 decimal places
-            usdAmountDisplay.textContent = `$${usdAmount.toFixed(2)} USD`;
-            
-            // Show the container
-            usdAmountContainer.classList.remove('hidden');
-            
-            // Enable the deposit button if amount is valid
-            if (usdAmount >= 1.0) {  // Minimum $1.00
-                depositButton.disabled = false;
-            } else {
-                depositButton.disabled = true;
-            }
-        } else {
-            // Hide the container if amount is invalid
-            usdAmountContainer.classList.add('hidden');
-            depositButton.disabled = true;
-        }
-    });
-    
-    // Also validate on form submit
-    document.querySelector('form').addEventListener('submit', function(e) {
-        const kesAmount = parseFloat(amountInput.value);
-        const usdAmount = kesAmount / buyRate;
-        
-        if (usdAmount < 1.0) {
-            e.preventDefault();
-            alert('The amount must be at least $1.00 USD equivalent.');
-        }
-    });
-});
-</script>
 
     <!-- Hidden div for printing -->
     <div id="printableReceipt" style="display: none;"></div>
