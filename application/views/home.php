@@ -974,196 +974,196 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     <script>
-        // Add this JavaScript code to your existing script section
+//         // Add this JavaScript code to your existing script section
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Get the exchange rate from PHP (passed to JavaScript)
-    const exchangeRate = <?php echo isset($buyrate) && !empty($buyrate) ? $buyrate : 'null'; ?>;
+// document.addEventListener('DOMContentLoaded', function() {
+//     // Get the exchange rate from PHP (passed to JavaScript)
+//     const exchangeRate = <?php echo isset($buyrate) && !empty($buyrate) ? $buyrate : 'null'; ?>;
     
-    // Get form elements
-    const amountInput = document.getElementById('amountdepo');
-    const usdAmountContainer = document.getElementById('usdAmountContainer');
-    const usdAmountDisplay = document.getElementById('usdAmount');
-    const currentRateDisplay = document.getElementById('currentRate');
-    const depositButton = document.getElementById('depo');
+//     // Get form elements
+//     const amountInput = document.getElementById('amountdepo');
+//     const usdAmountContainer = document.getElementById('usdAmountContainer');
+//     const usdAmountDisplay = document.getElementById('usdAmount');
+//     const currentRateDisplay = document.getElementById('currentRate');
+//     const depositButton = document.getElementById('depo');
 
-    // Function to calculate and display USD amount
-    function calculateAndDisplayUSD() {
-        const kesAmount = parseFloat(amountInput.value) || 0;
+//     // Function to calculate and display USD amount
+//     function calculateAndDisplayUSD() {
+//         const kesAmount = parseFloat(amountInput.value) || 0;
         
-        if (kesAmount > 0 && exchangeRate && exchangeRate > 0) {
-            const usdAmount = (kesAmount / exchangeRate).toFixed(2);
+//         if (kesAmount > 0 && exchangeRate && exchangeRate > 0) {
+//             const usdAmount = (kesAmount / exchangeRate).toFixed(2);
             
-            // Show the USD amount container
-            usdAmountContainer.classList.remove('hidden');
+//             // Show the USD amount container
+//             usdAmountContainer.classList.remove('hidden');
             
-            // Update the displays
-            usdAmountDisplay.textContent = `$${usdAmount} USD`;
-            currentRateDisplay.textContent = `1 USD = ${exchangeRate} KES`;
+//             // Update the displays
+//             usdAmountDisplay.textContent = `$${usdAmount} USD`;
+//             currentRateDisplay.textContent = `1 USD = ${exchangeRate} KES`;
             
-            // Enable the deposit button if amount is valid
-            if (parseFloat(usdAmount) >= 1.00) {
-                depositButton.disabled = false;
-                depositButton.classList.remove('opacity-50', 'cursor-not-allowed');
-            } else {
-                depositButton.disabled = true;
-                depositButton.classList.add('opacity-50', 'cursor-not-allowed');
+//             // Enable the deposit button if amount is valid
+//             if (parseFloat(usdAmount) >= 1.00) {
+//                 depositButton.disabled = false;
+//                 depositButton.classList.remove('opacity-50', 'cursor-not-allowed');
+//             } else {
+//                 depositButton.disabled = true;
+//                 depositButton.classList.add('opacity-50', 'cursor-not-allowed');
                 
-                // Show minimum amount warning
-                const errorDiv = document.querySelector('.error-message-amount');
-                if (errorDiv) {
-                    errorDiv.textContent = 'Minimum deposit is $1.00 USD';
-                }
-            }
-        } else {
-            // Hide the USD amount container if no valid amount
-            usdAmountContainer.classList.add('hidden');
-            depositButton.disabled = true;
-            depositButton.classList.add('opacity-50', 'cursor-not-allowed');
-        }
-    }
+//                 // Show minimum amount warning
+//                 const errorDiv = document.querySelector('.error-message-amount');
+//                 if (errorDiv) {
+//                     errorDiv.textContent = 'Minimum deposit is $1.00 USD';
+//                 }
+//             }
+//         } else {
+//             // Hide the USD amount container if no valid amount
+//             usdAmountContainer.classList.add('hidden');
+//             depositButton.disabled = true;
+//             depositButton.classList.add('opacity-50', 'cursor-not-allowed');
+//         }
+//     }
 
-    // Function to validate the entire form
-    function validateDepositForm() {
-        const crNumberInput = document.getElementById('crNumberdepo');
-        const crNumberValid = /^CR\d{7}$/.test(crNumberInput.value.toUpperCase());
-        const kesAmount = parseFloat(amountInput.value) || 0;
-        const usdAmount = kesAmount / exchangeRate;
+//     // Function to validate the entire form
+//     function validateDepositForm() {
+//         const crNumberInput = document.getElementById('crNumberdepo');
+//         const crNumberValid = /^CR\d{7}$/.test(crNumberInput.value.toUpperCase());
+//         const kesAmount = parseFloat(amountInput.value) || 0;
+//         const usdAmount = kesAmount / exchangeRate;
         
-        // Check if both CR number is valid and USD amount is at least $1
-        const formValid = crNumberValid && usdAmount >= 1.00 && kesAmount > 0;
+//         // Check if both CR number is valid and USD amount is at least $1
+//         const formValid = crNumberValid && usdAmount >= 1.00 && kesAmount > 0;
         
-        // Enable/disable button based on validation
-        depositButton.disabled = !formValid;
-        if (formValid) {
-            depositButton.classList.remove('opacity-50', 'cursor-not-allowed');
-        } else {
-            depositButton.classList.add('opacity-50', 'cursor-not-allowed');
-        }
+//         // Enable/disable button based on validation
+//         depositButton.disabled = !formValid;
+//         if (formValid) {
+//             depositButton.classList.remove('opacity-50', 'cursor-not-allowed');
+//         } else {
+//             depositButton.classList.add('opacity-50', 'cursor-not-allowed');
+//         }
         
-        // Update error messages
-        const crError = document.querySelector('.error-message-cr');
-        const amountError = document.querySelector('.error-message-amount');
+//         // Update error messages
+//         const crError = document.querySelector('.error-message-cr');
+//         const amountError = document.querySelector('.error-message-amount');
         
-        if (crError) {
-            crError.textContent = crNumberValid ? '' : 'CR number must be in format CR1234567';
-        }
+//         if (crError) {
+//             crError.textContent = crNumberValid ? '' : 'CR number must be in format CR1234567';
+//         }
         
-        if (amountError) {
-            if (kesAmount > 0 && usdAmount < 1.00) {
-                amountError.textContent = 'Minimum deposit is $1.00 USD';
-            } else if (kesAmount <= 0) {
-                amountError.textContent = 'Amount must be greater than 0';
-            } else {
-                amountError.textContent = '';
-            }
-        }
-    }
+//         if (amountError) {
+//             if (kesAmount > 0 && usdAmount < 1.00) {
+//                 amountError.textContent = 'Minimum deposit is $1.00 USD';
+//             } else if (kesAmount <= 0) {
+//                 amountError.textContent = 'Amount must be greater than 0';
+//             } else {
+//                 amountError.textContent = '';
+//             }
+//         }
+//     }
 
-    // Add event listeners
-    if (amountInput) {
-        // Update USD display as user types
-        amountInput.addEventListener('input', function() {
-            calculateAndDisplayUSD();
-            validateDepositForm();
-        });
+//     // Add event listeners
+//     if (amountInput) {
+//         // Update USD display as user types
+//         amountInput.addEventListener('input', function() {
+//             calculateAndDisplayUSD();
+//             validateDepositForm();
+//         });
         
-        // Also trigger on paste and change events
-        amountInput.addEventListener('paste', function() {
-            setTimeout(calculateAndDisplayUSD, 10);
-        });
+//         // Also trigger on paste and change events
+//         amountInput.addEventListener('paste', function() {
+//             setTimeout(calculateAndDisplayUSD, 10);
+//         });
         
-        amountInput.addEventListener('change', function() {
-            calculateAndDisplayUSD();
-            validateDepositForm();
-        });
-    }
+//         amountInput.addEventListener('change', function() {
+//             calculateAndDisplayUSD();
+//             validateDepositForm();
+//         });
+//     }
 
-    // Add CR number validation
-    const crNumberInput = document.getElementById('crNumberdepo');
-    if (crNumberInput) {
-        crNumberInput.addEventListener('input', validateDepositForm);
-    }
+//     // Add CR number validation
+//     const crNumberInput = document.getElementById('crNumberdepo');
+//     if (crNumberInput) {
+//         crNumberInput.addEventListener('input', validateDepositForm);
+//     }
 
-    // Initialize on page load
-    if (exchangeRate) {
-        calculateAndDisplayUSD();
-        validateDepositForm();
-    } else {
-        console.error('Exchange rate not available');
-        // Show error message to user
-        const errorDiv = document.querySelector('.error-message-amount');
-        if (errorDiv) {
-            errorDiv.textContent = 'Exchange rate not available. Please refresh the page.';
-        }
-    }
+//     // Initialize on page load
+//     if (exchangeRate) {
+//         calculateAndDisplayUSD();
+//         validateDepositForm();
+//     } else {
+//         console.error('Exchange rate not available');
+//         // Show error message to user
+//         const errorDiv = document.querySelector('.error-message-amount');
+//         if (errorDiv) {
+//             errorDiv.textContent = 'Exchange rate not available. Please refresh the page.';
+//         }
+//     }
 
-    // Function to format numbers with commas
-    function formatNumber(num) {
-        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
+//     // Function to format numbers with commas
+//     function formatNumber(num) {
+//         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+//     }
 
-    // Enhanced calculation with formatting
-    function calculateAndDisplayUSDEnhanced() {
-        const kesAmount = parseFloat(amountInput.value) || 0;
+//     // Enhanced calculation with formatting
+//     function calculateAndDisplayUSDEnhanced() {
+//         const kesAmount = parseFloat(amountInput.value) || 0;
         
-        if (kesAmount > 0 && exchangeRate && exchangeRate > 0) {
-            const usdAmount = (kesAmount / exchangeRate).toFixed(2);
+//         if (kesAmount > 0 && exchangeRate && exchangeRate > 0) {
+//             const usdAmount = (kesAmount / exchangeRate).toFixed(2);
             
-            // Show the USD amount container with animation
-            usdAmountContainer.classList.remove('hidden');
-            usdAmountContainer.style.opacity = '0';
-            usdAmountContainer.style.transform = 'translateY(-10px)';
+//             // Show the USD amount container with animation
+//             usdAmountContainer.classList.remove('hidden');
+//             usdAmountContainer.style.opacity = '0';
+//             usdAmountContainer.style.transform = 'translateY(-10px)';
             
-            setTimeout(() => {
-                usdAmountContainer.style.transition = 'all 0.3s ease';
-                usdAmountContainer.style.opacity = '1';
-                usdAmountContainer.style.transform = 'translateY(0)';
-            }, 10);
+//             setTimeout(() => {
+//                 usdAmountContainer.style.transition = 'all 0.3s ease';
+//                 usdAmountContainer.style.opacity = '1';
+//                 usdAmountContainer.style.transform = 'translateY(0)';
+//             }, 10);
             
-            // Update the displays with formatted numbers
-            usdAmountDisplay.textContent = `$${formatNumber(usdAmount)} USD`;
-            currentRateDisplay.textContent = `1 USD = ${formatNumber(exchangeRate)} KES`;
+//             // Update the displays with formatted numbers
+//             usdAmountDisplay.textContent = `$${formatNumber(usdAmount)} USD`;
+//             currentRateDisplay.textContent = `1 USD = ${formatNumber(exchangeRate)} KES`;
             
-            // Validation logic
-            if (parseFloat(usdAmount) >= 1.00) {
-                depositButton.disabled = false;
-                depositButton.classList.remove('opacity-50', 'cursor-not-allowed');
+//             // Validation logic
+//             if (parseFloat(usdAmount) >= 1.00) {
+//                 depositButton.disabled = false;
+//                 depositButton.classList.remove('opacity-50', 'cursor-not-allowed');
                 
-                // Clear any error messages
-                const errorDiv = document.querySelector('.error-message-amount');
-                if (errorDiv) {
-                    errorDiv.textContent = '';
-                }
-            } else {
-                depositButton.disabled = true;
-                depositButton.classList.add('opacity-50', 'cursor-not-allowed');
+//                 // Clear any error messages
+//                 const errorDiv = document.querySelector('.error-message-amount');
+//                 if (errorDiv) {
+//                     errorDiv.textContent = '';
+//                 }
+//             } else {
+//                 depositButton.disabled = true;
+//                 depositButton.classList.add('opacity-50', 'cursor-not-allowed');
                 
-                // Show minimum amount warning
-                const errorDiv = document.querySelector('.error-message-amount');
-                if (errorDiv) {
-                    errorDiv.textContent = 'Minimum deposit is $1.00 USD';
-                }
-            }
-        } else {
-            // Hide the USD amount container with animation
-            usdAmountContainer.style.transition = 'all 0.3s ease';
-            usdAmountContainer.style.opacity = '0';
-            usdAmountContainer.style.transform = 'translateY(-10px)';
+//                 // Show minimum amount warning
+//                 const errorDiv = document.querySelector('.error-message-amount');
+//                 if (errorDiv) {
+//                     errorDiv.textContent = 'Minimum deposit is $1.00 USD';
+//                 }
+//             }
+//         } else {
+//             // Hide the USD amount container with animation
+//             usdAmountContainer.style.transition = 'all 0.3s ease';
+//             usdAmountContainer.style.opacity = '0';
+//             usdAmountContainer.style.transform = 'translateY(-10px)';
             
-            setTimeout(() => {
-                usdAmountContainer.classList.add('hidden');
-            }, 300);
+//             setTimeout(() => {
+//                 usdAmountContainer.classList.add('hidden');
+//             }, 300);
             
-            depositButton.disabled = true;
-            depositButton.classList.add('opacity-50', 'cursor-not-allowed');
-        }
-    }
+//             depositButton.disabled = true;
+//             depositButton.classList.add('opacity-50', 'cursor-not-allowed');
+//         }
+//     }
 
-    // Replace the basic function with the enhanced one
-    amountInput.removeEventListener('input', calculateAndDisplayUSD);
-    amountInput.addEventListener('input', calculateAndDisplayUSDEnhanced);
-});
+//     // Replace the basic function with the enhanced one
+//     amountInput.removeEventListener('input', calculateAndDisplayUSD);
+//     amountInput.addEventListener('input', calculateAndDisplayUSDEnhanced);
+// });
 
 // Add this CSS for smooth transitions (add to your existing styles)
 const additionalStyles = `
