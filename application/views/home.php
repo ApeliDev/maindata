@@ -566,7 +566,7 @@ if(!empty($checkout_token))
                             <div class="error-message-amount text-red-500 text-xs mt-1"></div>
                         </div>
                         <!-- Add this new div to show the USD amount -->
-                        <div id="usdAmountContainer" class="hidden">
+                        <!-- <div id="usdAmountContainer" class="hidden">
                             <div class="flex items-center justify-between p-3 bg-gray-100 dark:bg-gray-800 rounded-lg">
                                 <span class="text-sm font-medium text-gray-700 dark:text-gray-300">You will receive:</span>
                                 <span id="usdAmount" class="text-lg font-semibold text-primary dark:text-primary-300">$0.00 USD</span>
@@ -574,7 +574,7 @@ if(!empty($checkout_token))
                             <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">
                                 Rate: <span id="currentRate">1 USD = <?php echo $buyrate[0]['kes'] ?? '0'; ?> KES</span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
                         <button type="submit" id="depo" disabled class="text-white bg-gradient-primary hover:opacity-90 focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:opacity-50 disabled:cursor-not-allowed">
