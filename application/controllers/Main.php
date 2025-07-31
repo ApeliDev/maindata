@@ -69,6 +69,8 @@ class Main extends CI_Controller {
             redirect('logout');
         } elseif($status == 'success' || $status == 'error') {
             $response = $data;
+            // Add buy rate to the response data
+            $response['buyrate'] = $data['buyrate'];
             $this->load->view('includes/header');
             $this->load->view('home', $response);
             $this->load->view('includes/footer', $response);
