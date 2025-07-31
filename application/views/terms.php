@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms of Use - StepaKash</title>
     <style>
-            :root {
+        :root {
             --primary-color: #0f753a;       /* Updated green */
             --secondary-color: #2c8a53;     /* Slightly lighter green */
             --accent-color: #efd050;        /* Updated yellow/gold */
@@ -101,6 +101,25 @@
             background: var(--secondary-color);
         }
 
+        h3 {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 25px 0 15px 0;
+            padding: 10px 0;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .intro-text {
+            background: linear-gradient(135deg, rgba(15, 117, 58, 0.05), rgba(15, 117, 58, 0.02));
+            border: 2px solid var(--accent-color);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
         .acknowledgment {
             background: linear-gradient(135deg, rgba(15, 117, 58, 0.05), rgba(15, 117, 58, 0.02));
             border: 2px solid var(--accent-color);
@@ -154,32 +173,78 @@
             font-size: 1.1rem;
         }
 
-        ol {
-            counter-reset: item;
-            padding-left: 0;
-            margin: 20px 0;
-        }
-
-        ol li {
-            display: block;
-            margin: 25px 0;
+        .section {
+            margin: 30px 0;
             padding: 25px;
             background: linear-gradient(135deg, rgba(15, 117, 58, 0.03), var(--card-bg));
             border-radius: 12px;
             border-left: 5px solid var(--accent-color);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            position: relative;
-            color: var(--text-color);
-            line-height: 1.7;
         }
 
-        ol li::before {
-            content: counter(item);
-            counter-increment: item;
-            position: absolute;
-            left: -15px;
-            top: 15px;
+        .section-number {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border: 3px solid var(--accent-color);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            margin-right: 15px;
+            vertical-align: top;
+        }
+
+        .subsection {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(239, 208, 80, 0.05);
+            border-radius: 10px;
+            border-left: 3px solid var(--secondary-color);
+        }
+
+        .subsection-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        ul {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        ul li {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .bullet-point {
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        .checkbox-container {
+            background: linear-gradient(135deg, rgba(239, 208, 80, 0.1), rgba(244, 220, 116, 0.05));
+            border: 2px solid var(--accent-color);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .checkbox-container::before {
+            content: "☑";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-color);
             color: white;
             width: 35px;
             height: 35px;
@@ -187,10 +252,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 1.3rem;
             font-weight: bold;
-            font-size: 1.1rem;
-            border: 3px solid var(--accent-color);
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            border: 3px solid white;
         }
 
         .disclaimer {
@@ -279,8 +343,15 @@
                 font-size: 2rem;
             }
             
-            ol li {
-                padding: 20px 20px 20px 35px;
+            .section {
+                padding: 20px;
+            }
+            
+            .section-number {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+                margin-right: 10px;
             }
         }
     </style>
@@ -297,6 +368,10 @@
                 <strong>Last Updated:</strong> August 1, 2025
             </div>
 
+            <div class="intro-text">
+                These Terms and Conditions ("Terms") govern your use of the services provided by StepaKash, a digital financial technology (fintech) platform ("StepaKash", "we", "us", or "our"). By creating an account or using any services on our platform, you agree to be bound by these Terms.
+            </div>
+
             <div class="acknowledgment">
                 <h2>By accepting these Terms of Use and using the StepaKash Service you acknowledge that:</h2>
                 <p>(i) we are not a bank and your Account is not a bank account;</p>
@@ -305,23 +380,152 @@
                 <p>(iv) we do not pay you interest on any balances in your Account.</p>
             </div>
 
-            <h2>Terms and Conditions</h2>
-            <ol>
-                <li>To become a member, you must be 18 years of age and above/over.</li>
-                <li>You must be a resident of the country where we provide services.</li>
-                <li>You may not permit any other person to use your Account. You may not open more than one Account or have Multiple CR Accounts in our system, without notice, we will close any or all of the Accounts of a Member who has, or whom we reasonably suspect has, unauthorized multiple Accounts.</li>
-                <li>We reserve the right to decline any Transaction at our sole discretion in circumstances where that Transaction is fraudulent would be in breach of these Terms of Use or any applicable law and regulation or you have insufficient funds to make the Transaction. We shall not be liable in the event that a DERIV or MPESA refuses to accept your WITHDRAWAL/DEPOSIT or if we do not authorize a Transaction.</li>
-                <li>When making a Payment from your Account, you may not designate an amount in excess of the balance (plus the applicable Fees) in your Account at the time the request is made. If you attempt to do so, your Payment request will be denied. The funds on your StepaKash WALLET account must also be sufficient to cover any minimum Withdrawal amount. If you do not have sufficient funds on your StepaKash WALLET account, your request to withdraw funds will be rejected.</li>
-            </ol>
+            <div class="section">
+                <span class="section-number">1</span>
+                <h3>Legal Relationship & Disclaimer</h3>
+                <p>By accepting these Terms and using the StepaKash service, you expressly acknowledge and agree that:</p>
+                
+                <div class="subsection">
+                    <div class="subsection-title">1.1 Non-Banking Status</div>
+                    <p>StepaKash is a financial technology service provider and not a bank. Your StepaKash Wallet ("Account") is not a bank account, and you are not entitled to any bank-related privileges under your use of our service.</p>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">1.2 No Government or Broker Insurance</div>
+                    <p>Your Account is not insured by any government agency or Deriv Broker, and you accept all risks associated with holding balances within our platform.</p>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">1.3 No Trustee Relationship</div>
+                    <p>StepaKash does not act as a trustee, fiduciary, or escrow holder for the balances held in your Account. We are merely facilitating digital financial transactions at your direction.</p>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">1.4 No Interest Earnings</div>
+                    <p>We do not pay interest on any balances maintained in your Account.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <span class="section-number">2</span>
+                <h3>Eligibility for Use</h3>
+                
+                <div class="subsection">
+                    <div class="subsection-title">2.1 Minimum Age</div>
+                    <p>To use our services, you must be 18 years or older and possess full legal capacity to enter into a binding agreement.</p>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">2.2 Residency</div>
+                    <p>You must be a legal resident of a country where StepaKash services are officially offered.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <span class="section-number">3</span>
+                <h3>Account Use and Limitations</h3>
+                
+                <div class="subsection">
+                    <div class="subsection-title">3.1 Personal Use Only</div>
+                    <p>You may not permit any other person to access or use your StepaKash Account. Each account is personal, and you are solely responsible for maintaining its confidentiality and security.</p>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">3.2 One Account Policy</div>
+                    <p>You may only open one Account with us. If you create or are suspected to have created multiple accounts (including multiple CR accounts), we reserve the right—without prior notice—to close or suspend any or all related accounts.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <span class="section-number">4</span>
+                <h3>Transactions & Restrictions</h3>
+                
+                <div class="subsection">
+                    <div class="subsection-title">4.1 Transaction Approval Rights</div>
+                    <p>We reserve the sole right to decline or block any transaction that:</p>
+                    <ul>
+                        <li>Appears fraudulent,</li>
+                        <li>Violates these Terms or applicable laws,</li>
+                        <li>Involves insufficient funds, or</li>
+                        <li>Raises any compliance or risk concerns.</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">4.2 Partner Refusal Liability</div>
+                    <p>We shall not be liable if DERIV, MPESA, or any third-party platform:</p>
+                    <ul>
+                        <li>Refuses your deposit or withdrawal,</li>
+                        <li>Fails to authorize a transaction, or</li>
+                        <li>Experiences downtime or transactional delays.</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">4.3 Sufficient Balance Requirement</div>
+                    <p>When requesting a withdrawal or payment:</p>
+                    <ul>
+                        <li>You may not exceed the available balance in your StepaKash Wallet (including applicable fees).</li>
+                        <li>Transactions that exceed your available balance will be denied.</li>
+                        <li>You must also meet any minimum withdrawal threshold set on the platform. If your balance is insufficient, your request will be automatically rejected.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <span class="section-number">5</span>
+                <h3>Fees and Charges</h3>
+                
+                <div class="subsection">
+                    <div class="subsection-title">5.1 Service Fees</div>
+                    <p>All applicable transaction fees, withdrawal charges, or service costs will be deducted directly from your account. A full breakdown of fees may be published and updated periodically on our website or app.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <span class="section-number">6</span>
+                <h3>Suspension & Termination</h3>
+                
+                <div class="subsection">
+                    <div class="subsection-title">6.1 Account Suspension or Termination</div>
+                    <p>We may suspend or permanently terminate your access to StepaKash services, without prior notice, if we reasonably believe you:</p>
+                    <ul>
+                        <li>Violated any of these Terms,</li>
+                        <li>Attempted to manipulate or exploit the platform,</li>
+                        <li>Engaged in any form of fraudulent, illegal, or abusive conduct.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <span class="section-number">7</span>
+                <h3>Updates to Terms</h3>
+                
+                <div class="subsection">
+                    <div class="subsection-title">7.1 Right to Amend</div>
+                    <p>We reserve the right to modify these Terms at any time. Continued use of the StepaKash platform after changes are made will constitute your acceptance of the updated Terms.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <span class="section-number">8</span>
+                <h3>Contact and Support</h3>
+                <p>If you have any questions, disputes, or require support, you may reach out to our customer service team through our official channels listed on the website or app.</p>
+            </div>
+
+            <div class="checkbox-container">
+                <h3 style="margin-bottom: 15px; border: none; text-transform: none; letter-spacing: normal;">Agreement Confirmation</h3>
+                <p><strong>By creating an account or continuing to use StepaKash, you confirm that you have read, understood, and agree to abide by these Terms and Conditions.</strong></p>
+            </div>
 
             <div class="disclaimer">
-                <h2>DISCLAIMER:</h2>
-                <p>Electronic money accounts are not bank accounts. In the unlikely event that we become insolvent, you may lose the electronic money held in your Account.</p>
+                <h2>DISCLAIMER</h2>
+                <p>While your StepaKash Wallet offers fast, secure, and convenient access to digital funds, please note that it is not a bank account. In the rare event of company insolvency, the balance in your Wallet may not be covered by deposit protection schemes, and recovery of funds is not guaranteed.</p>
             </div>
         </div>
         
         <div class="footer">
-            <p>&copy; <?php echo date('Y'); ?> StepaKash. All rights reserved.</p>
+            <p>&copy; <?php echo date("Y"); ?> StepaKash. All rights reserved.</p>
         </div>
     </div>
 </body>

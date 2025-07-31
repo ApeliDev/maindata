@@ -459,7 +459,7 @@ ol li::before {
         </div>
         
         <div class="footer">
-            <p>&copy; <?php echo date('Y'); ?> StepaKash. All rights reserved. | Last Updated: August 8th, 2025</p>
+            <p>&copy; <?php echo date('Y'); ?> StepaKash. All rights reserved.</p>
         </div>
     </div>
 </body>

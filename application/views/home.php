@@ -619,129 +619,129 @@ if(!empty($checkout_token))
     </div> -->
 
     <!-- Withdraw (Receive) Modal -->
-    <div id="withdrawModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center <div id="withdrawModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative p-4 w-full max-w-md max-h-full">
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                    Withdraw from Deriv
-                </h3>
+        <div id="withdrawModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center <div id="withdrawModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                        Withdraw from Deriv
+                    </h3>
+                    
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="withdrawModal">
+                        <i class="fas fa-times"></i>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
                 
-                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="withdrawModal">
-                    <i class="fas fa-times"></i>
-                    <span class="sr-only">Close modal</span>
-                </button>
-            </div>
-            
-            <!-- Withdrawal Instructions -->
-            <div class="p-4 md:p-5 bg-blue-50 dark:bg-gray-800 border-b dark:border-gray-600">
-                <h4 class="text-sm font-medium text-blue-900 dark:text-blue-200 mb-2">Withdrawal Steps:</h4>
-                <ol class="text-xs text-blue-800 dark:text-blue-300 space-y-2 list-decimal list-inside">
-                    <li class="flex items-start justify-between">
-                        <span class="flex-1 pr-2">Copy this link: <a href="https://hub.deriv.com/tradershub/wallets/payment-agent?PaymentType=withdraw" target="_blank" class="underline hover:no-underline break-all">https://hub.deriv.com/tradershub/wallets/payment-agent?PaymentType=withdraw</a></span>
-                        <button type="button" onclick="copyDerivLink(this)" class="ml-2 px-2 py-1 bg-blue-600 hover:bg-blue-700 text-white text-xs rounded focus:outline-none focus:ring-2 focus:ring-blue-500 flex-shrink-0">
-                            <i class="fas fa-copy mr-1"></i>Copy
+                <!-- Withdrawal Instructions -->
+                <div class="p-4 md:p-5 bg-blue-50 dark:bg-gray-800 border-b dark:border-gray-600">
+                    <h4 class="text-sm font-medium text-blue-900 dark:text-blue-200 mb-2">Withdrawal Steps:</h4>
+                    <ol class="text-xs text-blue-800 dark:text-blue-300 space-y-2 list-decimal list-inside">
+                        <li class="flex items-start justify-between">
+                            <span class="flex-1 pr-2">Copy this link: <a href="https://hub.deriv.com/tradershub/wallets/payment-agent?PaymentType=withdraw" target="_blank" class="underline hover:no-underline break-all">https://hub.deriv.com/tradershub/wallets/payment-agent?PaymentType=withdraw</a></span>
+                            <button type="button" onclick="copyDerivLink(this)" class="ml-2 px-2 py-1 bg-blue-600 hover:bg-blue-700 text-white text-xs rounded focus:outline-none focus:ring-2 focus:ring-blue-500 flex-shrink-0">
+                                <i class="fas fa-copy mr-1"></i>Copy
+                            </button>
+                        </li>
+                        <li>Complete the verification process via the email link sent to you</li>
+                        <li>Search for "stepakash official" on the platform</li>
+                        <li>Enter the same amount as requested on this website</li>
+                    </ol>
+                </div>
+                
+                <form method="POST" action="<?php echo base_url() ?>Main/WithdrawFromDeriv" onsubmit="return disableSubmitButtonWithdraw()">
+                    <div class="p-4 md:p-5 space-y-4">
+                        <div>
+                            <label for="crNumberWithdraw" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CR Number</label>
+                            <input type="text" id="crNumberWithdraw" name="crNumber_withdraw" style="text-transform: uppercase;" value="<?php echo $this->session->userdata('account_number'); ?>" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="CR1234567" readonly required>
+                            <div class="error-message-cr-withdraw text-red-500 text-xs mt-1"></div>
+                        </div>
+                        <div>
+                            <label for="amountWithdraw" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount (USD)</label>
+                            <input type="number" id="amountWithdraw" name="deriv_amount" step="0.01" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Enter amount in USD" required>
+                            <div class="error-message-amount-withdraw text-red-500 text-xs mt-1"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Important Note -->
+                    <div class="px-4 md:px-5 pb-4">
+                        <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-3">
+                            <p class="text-xs text-yellow-800 dark:text-yellow-200 font-medium">
+                                <i class="fas fa-info-circle mr-1"></i>
+                                NB: All operations will be done on the website soon
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                        <button type="submit" id="withdrawButton" disabled class="text-white bg-gradient-primary hover:opacity-90 focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:opacity-50 disabled:cursor-not-allowed">
+                            Withdraw
                         </button>
-                    </li>
-                    <li>Complete the verification process via the email link sent to you</li>
-                    <li>Search for "stepakash official" on the platform</li>
-                    <li>Enter the same amount as requested on this website</li>
-                </ol>
+                        <button data-modal-hide="withdrawModal" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
             </div>
-            
-            <form method="POST" action="<?php echo base_url() ?>Main/WithdrawFromDeriv" onsubmit="return disableSubmitButtonWithdraw()">
-                <div class="p-4 md:p-5 space-y-4">
-                    <div>
-                        <label for="crNumberWithdraw" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CR Number</label>
-                        <input type="text" id="crNumberWithdraw" name="crNumber_withdraw" style="text-transform: uppercase;" value="<?php echo $this->session->userdata('account_number'); ?>" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="CR1234567" readonly required>
-                        <div class="error-message-cr-withdraw text-red-500 text-xs mt-1"></div>
-                    </div>
-                    <div>
-                        <label for="amountWithdraw" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount (USD)</label>
-                        <input type="number" id="amountWithdraw" name="deriv_amount" step="0.01" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Enter amount in USD" required>
-                        <div class="error-message-amount-withdraw text-red-500 text-xs mt-1"></div>
-                    </div>
-                </div>
-                
-                <!-- Important Note -->
-                <div class="px-4 md:px-5 pb-4">
-                    <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-3">
-                        <p class="text-xs text-yellow-800 dark:text-yellow-200 font-medium">
-                            <i class="fas fa-info-circle mr-1"></i>
-                            NB: All operations will be done on the website soon
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                    <button type="submit" id="withdrawButton" disabled class="text-white bg-gradient-primary hover:opacity-90 focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:opacity-50 disabled:cursor-not-allowed">
-                        Withdraw
-                    </button>
-                    <button data-modal-hide="withdrawModal" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
-                        Cancel
-                    </button>
-                </div>
-            </form>
         </div>
     </div>
-</div>
 
-<script>
-function copyDerivLink(button) {
-    const link = "https://hub.deriv.com/tradershub/wallets/payment-agent?PaymentType=withdraw";
-    
-    // Fallback for older browsers
-    if (!navigator.clipboard) {
-        // Create temporary textarea
-        const textArea = document.createElement("textarea");
-        textArea.value = link;
-        textArea.style.position = "fixed";
-        textArea.style.left = "-999999px";
-        textArea.style.top = "-999999px";
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
+    <script>
+    function copyDerivLink(button) {
+        const link = "https://hub.deriv.com/tradershub/wallets/payment-agent?PaymentType=withdraw";
         
-        try {
-            document.execCommand('copy');
-            showCopySuccess(button);
-        } catch (err) {
-            console.error('Fallback: Could not copy text: ', err);
-            showCopyError();
+        // Fallback for older browsers
+        if (!navigator.clipboard) {
+            // Create temporary textarea
+            const textArea = document.createElement("textarea");
+            textArea.value = link;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            textArea.style.top = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                showCopySuccess(button);
+            } catch (err) {
+                console.error('Fallback: Could not copy text: ', err);
+                showCopyError();
+            }
+            
+            document.body.removeChild(textArea);
+            return;
         }
         
-        document.body.removeChild(textArea);
-        return;
+        // Modern clipboard API
+        navigator.clipboard.writeText(link).then(function() {
+            showCopySuccess(button);
+        }).catch(function(err) {
+            console.error('Could not copy text: ', err);
+            showCopyError();
+        });
     }
-    
-    // Modern clipboard API
-    navigator.clipboard.writeText(link).then(function() {
-        showCopySuccess(button);
-    }).catch(function(err) {
-        console.error('Could not copy text: ', err);
-        showCopyError();
-    });
-}
 
-function showCopySuccess(button) {
-    const originalHTML = button.innerHTML;
-    button.innerHTML = '<i class="fas fa-check mr-1"></i>Copied!';
-    button.classList.remove('bg-blue-600', 'hover:bg-blue-700');
-    button.classList.add('bg-green-600');
-    button.disabled = true;
-    
-    setTimeout(function() {
-        button.innerHTML = originalHTML;
-        button.classList.remove('bg-green-600');
-        button.classList.add('bg-blue-600', 'hover:bg-blue-700');
-        button.disabled = false;
-    }, 2000);
-}
+    function showCopySuccess(button) {
+        const originalHTML = button.innerHTML;
+        button.innerHTML = '<i class="fas fa-check mr-1"></i>Copied!';
+        button.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+        button.classList.add('bg-green-600');
+        button.disabled = true;
+        
+        setTimeout(function() {
+            button.innerHTML = originalHTML;
+            button.classList.remove('bg-green-600');
+            button.classList.add('bg-blue-600', 'hover:bg-blue-700');
+            button.disabled = false;
+        }, 2000);
+    }
 
-function showCopyError() {
-    alert('Failed to copy link. Please copy the link manually: https://hub.deriv.com/tradershub/wallets/payment-agent?PaymentType=withdraw');
-}
-</script>
+    function showCopyError() {
+        alert('Failed to copy link. Please copy the link manually: https://hub.deriv.com/tradershub/wallets/payment-agent?PaymentType=withdraw');
+    }
+    </script>
     <!-- 
     <div id="withdrawModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-md max-h-full">
