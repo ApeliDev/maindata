@@ -541,81 +541,81 @@ if(!empty($checkout_token))
     </div>
 
     <!-- Replace your existing Deposit Modal with this updated version -->
-<div id="depositModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative p-4 w-full max-w-md max-h-full">
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                    Transfer to Deriv
-                </h3>
-                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="depositModal">
-                    <i class="fas fa-times"></i>
-                    <span class="sr-only">Close modal</span>
-                </button>
-            </div>
-            
-            <form method="POST" action="<?php echo base_url() ?>Main/DepositToDeriv" onsubmit="return disableDepositButton()">
-                <div class="p-4 md:p-5 space-y-4">
-                    <!-- Current Exchange Rate Display -->
-                    <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3 mb-4">
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm font-medium text-blue-900 dark:text-blue-200">Current Rate:</span>
-                            <span class="text-lg font-semibold text-blue-900 dark:text-blue-200">
-                                1 USD = <?php echo isset($buyrate) && !empty($buyrate) ? number_format($buyrate[0]['kes'], 2) : '0.00'; ?> KES
-                            </span>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label for="crNumberdepo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CR Number</label>
-                        <input type="text" id="crNumberdepo" name="crNumber" style="text-transform: uppercase;" value="<?php echo $this->session->userdata('account_number'); ?>" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="eg.CR1234567" readonly required>
-                        <div class="error-message-cr text-red-500 text-xs mt-1"></div>
-                    </div>
-                    
-                    <div>
-                        <label for="amountdepo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount (KES)</label>
-                        <input type="number" id="amountdepo" name="amount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Enter amount in KES" autocomplete="off" required>
-                        <div class="error-message-amount text-red-500 text-xs mt-1"></div>
-                    </div>
-                    
-                    <!-- USD Amount Display -->
-                    <div id="usdAmountContainer" class="hidden">
-                        <div class="flex items-center justify-between p-4 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-lg border border-green-200 dark:border-green-800 rate-highlight">
-                            <div class="flex flex-col">
-                                <span class="text-sm font-medium text-gray-700 dark:text-gray-300">You will receive:</span>
-                                <span class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                                    Rate: <span id="currentRate">1 USD = <?php echo isset($buyrate) && !empty($buyrate) ? number_format($buyrate[0]['kes'], 2) : '0.00'; ?> KES</span>
-                                </span>
-                            </div>
-                            <div class="text-right">
-                                <span id="usdAmount" class="text-xl font-bold text-green-600 dark:text-green-400 usd-amount-highlight">$0.00 USD</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Minimum Amount Notice -->
-                    <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-3">
-                        <div class="flex items-center">
-                            <i class="fas fa-info-circle text-yellow-600 dark:text-yellow-400 mr-2"></i>
-                            <span class="text-xs text-yellow-800 dark:text-yellow-200">
-                                Minimum deposit: $1.00 USD
-                            </span>
-                        </div>
-                    </div>
+    <!-- <div id="depositModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                        Transfer to Deriv
+                    </h3>
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="depositModal">
+                        <i class="fas fa-times"></i>
+                        <span class="sr-only">Close modal</span>
+                    </button>
                 </div>
                 
-                <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                    <button type="submit" id="depo" disabled class="text-white bg-gradient-primary hover:opacity-90 focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:opacity-50 disabled:cursor-not-allowed pulse-green">
-                        Fund Account
-                    </button>
-                    <button data-modal-hide="depositModal" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
-                        Cancel
-                    </button>
-                </div>
-            </form>
+                <form method="POST" action="<?php echo base_url() ?>Main/DepositToDeriv" onsubmit="return disableDepositButton()">
+                    <div class="p-4 md:p-5 space-y-4">
+                      
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3 mb-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium text-blue-900 dark:text-blue-200">Current Rate:</span>
+                                <span class="text-lg font-semibold text-blue-900 dark:text-blue-200">
+                                    1 USD = <?php echo isset($buyrate) && !empty($buyrate) ? number_format($buyrate[0]['kes'], 2) : '0.00'; ?> KES
+                                </span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="crNumberdepo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CR Number</label>
+                            <input type="text" id="crNumberdepo" name="crNumber" style="text-transform: uppercase;" value="<?php echo $this->session->userdata('account_number'); ?>" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="eg.CR1234567" readonly required>
+                            <div class="error-message-cr text-red-500 text-xs mt-1"></div>
+                        </div>
+                        
+                        <div>
+                            <label for="amountdepo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount (KES)</label>
+                            <input type="number" id="amountdepo" name="amount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Enter amount in KES" autocomplete="off" required>
+                            <div class="error-message-amount text-red-500 text-xs mt-1"></div>
+                        </div>
+                        
+                      
+                        <div id="usdAmountContainer" class="hidden">
+                            <div class="flex items-center justify-between p-4 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-lg border border-green-200 dark:border-green-800 rate-highlight">
+                                <div class="flex flex-col">
+                                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">You will receive:</span>
+                                    <span class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                        Rate: <span id="currentRate">1 USD = <?php echo isset($buyrate) && !empty($buyrate) ? number_format($buyrate[0]['kes'], 2) : '0.00'; ?> KES</span>
+                                    </span>
+                                </div>
+                                <div class="text-right">
+                                    <span id="usdAmount" class="text-xl font-bold text-green-600 dark:text-green-400 usd-amount-highlight">$0.00 USD</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-3">
+                            <div class="flex items-center">
+                                <i class="fas fa-info-circle text-yellow-600 dark:text-yellow-400 mr-2"></i>
+                                <span class="text-xs text-yellow-800 dark:text-yellow-200">
+                                    Minimum deposit: $1.00 USD
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                        <button type="submit" id="depo" disabled class="text-white bg-gradient-primary hover:opacity-90 focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:opacity-50 disabled:cursor-not-allowed pulse-green">
+                            Fund Account
+                        </button>
+                        <button data-modal-hide="depositModal" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
-</div>
+    </div> -->
 
 <!-- Add this script to your existing JavaScript section -->
 <script>
@@ -737,7 +737,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-    <!-- <div id="depositModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div id="depositModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-md max-h-full">
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
@@ -765,8 +765,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p class="text-gray-600 dark:text-gray-300 font-medium">
                         Please check back later.
                     </p>
-                </div>
-                
+                    <p class="text-gray-600 dark:text-gray-300 font-medium mt-4">
+                        If you made a deposit and it was not received, please reach us via <a href="https://wa.me/254741554994" target="_blank" class="text-primary underline">Contact Support</a>.
+                    </p>
+                </div>  
                 <div class="flex items-center justify-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
                     <button data-modal-hide="depositModal" type="button" class="text-white bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg text-sm font-medium px-6 py-2.5 focus:z-10 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700">
                         OK
@@ -774,10 +776,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
 
     <!-- Withdraw (Receive) Modal -->
-        <div id="withdrawModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center <div id="withdrawModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <!-- <div id="withdrawModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center <div id="withdrawModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-md max-h-full">
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
@@ -791,7 +793,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </button>
                 </div>
                 
-                <!-- Withdrawal Instructions -->
+              
                 <div class="p-4 md:p-5 bg-blue-50 dark:bg-gray-800 border-b dark:border-gray-600">
                     <h4 class="text-sm font-medium text-blue-900 dark:text-blue-200 mb-2">Withdrawal Steps:</h4>
                     <ol class="text-xs text-blue-800 dark:text-blue-300 space-y-2 list-decimal list-inside">
@@ -821,7 +823,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                     </div>
                     
-                    <!-- Important Note -->
+               
                     <div class="px-4 md:px-5 pb-4">
                         <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-3">
                             <p class="text-xs text-yellow-800 dark:text-yellow-200 font-medium">
@@ -841,7 +843,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </form>
             </div>
-        </div>
+        </div> -->
     </div>
 
     <script>
@@ -900,7 +902,7 @@ document.addEventListener('DOMContentLoaded', function() {
         alert('Failed to copy link. Please copy the link manually: https://hub.deriv.com/tradershub/wallets/payment-agent?PaymentType=withdraw');
     }
     </script>
-    <!-- 
+    
     <div id="withdrawModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-md max-h-full">
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -913,8 +915,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         <span class="sr-only">Close modal</span>
                     </button>
                 </div>
-                
-                
                 <div class="p-6 md:p-8 text-center space-y-4">
                     <div class="flex justify-center mb-4">
                         <div class="w-16 h-16 bg-yellow-100 dark:bg-yellow-900 rounded-full flex items-center justify-center">
@@ -930,8 +930,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p class="text-gray-600 dark:text-gray-300 font-medium">
                         Please check back later.
                     </p>
+                    <p class="text-gray-600 dark:text-gray-300 font-medium mt-4">
+                        If you made a withdrawal and it was not received, please reach us via <a href="https://wa.me/254741554994" target="_blank" class="text-primary underline">Contact Support</a>.
+                    </p>
                 </div>
-                
                 <div class="flex items-center justify-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
                     <button data-modal-hide="withdrawModal" type="button" class="text-white bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg text-sm font-medium px-6 py-2.5 focus:z-10 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700">
                         OK
@@ -939,7 +941,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
 
     <!-- Transaction Details Modal -->
     <div id="transactionModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
